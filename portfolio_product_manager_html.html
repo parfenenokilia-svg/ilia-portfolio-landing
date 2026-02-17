@@ -1916,14 +1916,21 @@
     if (!hero || !heroText || !heroImage || !heroSubtitle) return;
 
     const viewportWidth = Math.min(window.innerWidth, document.documentElement.clientWidth);
+    const visualViewportWidth = window.visualViewport ? window.visualViewport.width : viewportWidth;
+    const deviceShortSide = Math.min(window.screen.width || viewportWidth, window.screen.height || viewportWidth);
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-    const isMobileLikeViewport = isCoarsePointer || viewportWidth <= 1200;
+    const isMobileLikeViewport =
+      isCoarsePointer ||
+      viewportWidth <= 1200 ||
+      visualViewportWidth <= 600 ||
+      deviceShortSide <= 600;
     if (isMobileLikeViewport) {
       hero.classList.add('hero-mobile-stack');
-      hero.style.gridTemplateColumns = '1fr';
-      hero.style.paddingLeft = '24px';
-      hero.style.paddingRight = '24px';
-      hero.style.columnGap = '14px';
+      hero.style.setProperty('display', 'block', 'important');
+      hero.style.setProperty('grid-template-columns', '1fr', 'important');
+      hero.style.setProperty('padding-left', '24px', 'important');
+      hero.style.setProperty('padding-right', '24px', 'important');
+      hero.style.setProperty('column-gap', '14px', 'important');
       heroText.style.width = 'calc(100vw - 48px)';
       heroText.style.maxWidth = 'calc(100vw - 48px)';
       heroText.style.margin = '0 auto';
@@ -1939,10 +1946,11 @@
       }
     } else {
       hero.classList.remove('hero-mobile-stack');
-      hero.style.gridTemplateColumns = '';
-      hero.style.paddingLeft = '';
-      hero.style.paddingRight = '';
-      hero.style.columnGap = '';
+      hero.style.removeProperty('display');
+      hero.style.removeProperty('grid-template-columns');
+      hero.style.removeProperty('padding-left');
+      hero.style.removeProperty('padding-right');
+      hero.style.removeProperty('column-gap');
       heroText.style.width = '';
       heroText.style.maxWidth = '';
       heroText.style.margin = '';

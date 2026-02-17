@@ -105,7 +105,23 @@
     }
 
     .hero.hero-mobile-stack {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
+      padding-left: 72px !important;
+      padding-right: 72px !important;
+      gap: 14px !important;
+    }
+
+    .hero.hero-mobile-stack .hero-image {
+      width: 100%;
+      justify-content: center;
+      justify-self: center;
+      margin: 4px 0 10px;
+    }
+
+    .hero.hero-mobile-stack .hero-image img {
+      width: 100%;
+      max-width: none;
+      transform: rotate(-0.6deg);
     }
 
     .section-metrics {
@@ -1872,7 +1888,9 @@
     const heroSubtitle = heroText ? heroText.querySelector('h2') : null;
     if (!hero || !heroText || !heroImage || !heroSubtitle) return;
 
-    const isMobileLikeViewport = Math.min(window.innerWidth, document.documentElement.clientWidth) <= 1024;
+    const viewportWidth = Math.min(window.innerWidth, document.documentElement.clientWidth);
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const isMobileLikeViewport = isCoarsePointer || viewportWidth <= 1200;
     if (isMobileLikeViewport) {
       hero.classList.add('hero-mobile-stack');
       if (heroImage.parentElement !== heroText) {

@@ -1075,6 +1075,30 @@
       z-index: 2;
     }
 
+    /* Fallback for mobile webviews that report wide viewport values */
+    @media (max-width: 1200px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 120px 24px 0;
+        gap: 14px;
+      }
+      .hero-text,
+      .hero h2,
+      .hero ul,
+      .hero-actions,
+      .hero-image {
+        width: 100%;
+        max-width: 100%;
+      }
+      .hero-image {
+        justify-content: flex-start;
+      }
+      .hero-image img {
+        width: 100%;
+        max-width: none;
+      }
+    }
+
     .semi-circles {
       position: absolute;
       inset: -60px;

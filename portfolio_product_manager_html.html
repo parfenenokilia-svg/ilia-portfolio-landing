@@ -106,8 +106,8 @@
 
     .hero.hero-mobile-stack {
       grid-template-columns: 1fr !important;
-      padding-left: 72px !important;
-      padding-right: 72px !important;
+      padding-left: 24px !important;
+      padding-right: 24px !important;
       gap: 14px !important;
     }
 
@@ -1287,7 +1287,7 @@
       section[id] { scroll-margin-top: 136px; }
       .hero {
         grid-template-columns: 1fr;
-        padding: 120px 8px 0;
+        padding: 120px 24px 0;
         gap: 14px;
       }
       .hero-text {
@@ -1893,11 +1893,19 @@
     const isMobileLikeViewport = isCoarsePointer || viewportWidth <= 1200;
     if (isMobileLikeViewport) {
       hero.classList.add('hero-mobile-stack');
+      hero.style.gridTemplateColumns = '1fr';
+      hero.style.paddingLeft = '24px';
+      hero.style.paddingRight = '24px';
+      hero.style.columnGap = '14px';
       if (heroImage.parentElement !== heroText) {
         heroText.insertBefore(heroImage, heroSubtitle);
       }
     } else {
       hero.classList.remove('hero-mobile-stack');
+      hero.style.gridTemplateColumns = '';
+      hero.style.paddingLeft = '';
+      hero.style.paddingRight = '';
+      hero.style.columnGap = '';
       if (heroImage.parentElement !== hero) hero.appendChild(heroImage);
     }
   }

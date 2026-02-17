@@ -1266,20 +1266,14 @@
       }
       section[id] { scroll-margin-top: 136px; }
       .hero { grid-template-columns: 1fr; padding: 120px 32px 0; }
-      .hero-text { display: contents; }
-      .hero-text h1 { order: 1; margin-bottom: 8px; }
       .hero-image {
-        order: 2;
         justify-self: start;
-        margin: 4px 0 14px;
+        margin: 6px 0 14px;
       }
       .hero-image img {
         max-width: 250px;
         transform: rotate(-0.6deg);
       }
-      .hero-text h2 { order: 3; margin-bottom: 20px; }
-      .hero-text ul { order: 4; margin-bottom: 24px; }
-      .hero-actions { order: 5; }
       .about { padding: 0 32px 0; grid-template-columns: 1fr; }
       .about-timeline {
         max-width: 100%;
@@ -1839,6 +1833,22 @@
     if (!isActive) item.classList.add('active');
   }
 
+  function syncHeroImagePosition() {
+    const hero = document.querySelector('.hero');
+    const heroText = document.querySelector('.hero-text');
+    const heroImage = document.querySelector('.hero-image');
+    const heroSubtitle = heroText ? heroText.querySelector('h2') : null;
+    if (!hero || !heroText || !heroImage || !heroSubtitle) return;
+
+    if (window.matchMedia('(max-width: 960px)').matches) {
+      if (heroImage.parentElement !== heroText) {
+        heroText.insertBefore(heroImage, heroSubtitle);
+      }
+    } else if (heroImage.parentElement !== hero) {
+      hero.appendChild(heroImage);
+    }
+  }
+
   function toggleQa(item) {
     const isActive = item.classList.contains('active');
     document.querySelectorAll('.qa-item').forEach(c => c.classList.remove('active'));
@@ -2094,6 +2104,8 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    syncHeroImagePosition();
+    window.addEventListener('resize', syncHeroImagePosition);
     captureRuState();
     const savedLang = localStorage.getItem('landing-lang') || 'ru';
     setLanguage(savedLang);

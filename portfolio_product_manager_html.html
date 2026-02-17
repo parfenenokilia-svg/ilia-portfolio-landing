@@ -27,6 +27,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
       background-image:
         linear-gradient(to right, var(--grid) 1px, transparent 1px),
         linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
@@ -1229,19 +1230,22 @@
     @media (max-width: 960px) {
       header {
         padding: 14px 16px;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-        row-gap: 10px;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
       }
       header nav {
-        grid-column: 1 / -1;
+        order: 3;
+        width: 100%;
         gap: 16px;
+        flex-wrap: nowrap;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 4px;
+        padding-bottom: 2px;
       }
+      header nav::-webkit-scrollbar { display: none; }
       header nav a {
         margin-left: 0;
         flex: 0 0 auto;
@@ -1249,14 +1253,18 @@
         letter-spacing: 0.06em;
       }
       #brand-name {
+        order: 1;
+        flex: 1 1 auto;
         font-size: 20px;
-        white-space: nowrap;
+        line-height: 1.15;
+        white-space: normal;
       }
       .lang-switch {
+        order: 2;
         margin-left: 0;
-        justify-self: end;
+        margin-left: auto;
       }
-      section[id] { scroll-margin-top: 160px; }
+      section[id] { scroll-margin-top: 136px; }
       .hero { grid-template-columns: 1fr; padding: 120px 32px 0; }
       .about { padding: 0 32px 0; grid-template-columns: 1fr; }
       .about-timeline {

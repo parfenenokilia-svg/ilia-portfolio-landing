@@ -27,6 +27,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
       background-image:
         linear-gradient(to right, var(--grid) 1px, transparent 1px),
         linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
@@ -53,6 +54,11 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       transition: color 160ms ease;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
     }
 
     header nav a:hover {
@@ -1222,9 +1228,52 @@
     }
 
     @media (max-width: 960px) {
-      header { padding: 16px 32px; }
-      .lang-switch { margin-left: 10px; }
+      header {
+        padding: 14px 16px;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      header nav {
+        order: 3;
+        width: 100%;
+        gap: 16px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2px;
+      }
+      header nav::-webkit-scrollbar { display: none; }
+      header nav a {
+        margin-left: 0;
+        flex: 0 0 auto;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+      }
+      #brand-name {
+        order: 1;
+        flex: 1 1 auto;
+        font-size: 20px;
+        line-height: 1.15;
+        white-space: normal;
+      }
+      .lang-switch {
+        order: 2;
+        margin-left: 0;
+        margin-left: auto;
+      }
+      section[id] { scroll-margin-top: 136px; }
       .hero { grid-template-columns: 1fr; padding: 120px 32px 0; }
+      .hero-image {
+        justify-self: start;
+        margin: 6px 0 14px;
+      }
+      .hero-image img {
+        max-width: 250px;
+        transform: rotate(-0.6deg);
+      }
       .about { padding: 0 32px 0; grid-template-columns: 1fr; }
       .about-timeline {
         max-width: 100%;
@@ -1784,6 +1833,22 @@
     if (!isActive) item.classList.add('active');
   }
 
+  function syncHeroImagePosition() {
+    const hero = document.querySelector('.hero');
+    const heroText = document.querySelector('.hero-text');
+    const heroImage = document.querySelector('.hero-image');
+    const heroSubtitle = heroText ? heroText.querySelector('h2') : null;
+    if (!hero || !heroText || !heroImage || !heroSubtitle) return;
+
+    if (window.matchMedia('(max-width: 960px)').matches) {
+      if (heroImage.parentElement !== heroText) {
+        heroText.insertBefore(heroImage, heroSubtitle);
+      }
+    } else if (heroImage.parentElement !== hero) {
+      hero.appendChild(heroImage);
+    }
+  }
+
   function toggleQa(item) {
     const isActive = item.classList.contains('active');
     document.querySelectorAll('.qa-item').forEach(c => c.classList.remove('active'));
@@ -2039,6 +2104,8 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    syncHeroImagePosition();
+    window.addEventListener('resize', syncHeroImagePosition);
     captureRuState();
     const savedLang = localStorage.getItem('landing-lang') || 'ru';
     setLanguage(savedLang);

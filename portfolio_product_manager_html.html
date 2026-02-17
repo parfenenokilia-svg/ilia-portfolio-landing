@@ -55,6 +55,11 @@
       transition: color 160ms ease;
     }
 
+    header nav {
+      display: flex;
+      align-items: center;
+    }
+
     header nav a:hover {
       color: #8a6a00;
     }
@@ -1222,8 +1227,36 @@
     }
 
     @media (max-width: 960px) {
-      header { padding: 16px 32px; }
-      .lang-switch { margin-left: 10px; }
+      header {
+        padding: 14px 16px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        row-gap: 10px;
+      }
+      header nav {
+        grid-column: 1 / -1;
+        gap: 16px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+      }
+      header nav a {
+        margin-left: 0;
+        flex: 0 0 auto;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+      }
+      #brand-name {
+        font-size: 20px;
+        white-space: nowrap;
+      }
+      .lang-switch {
+        margin-left: 0;
+        justify-self: end;
+      }
+      section[id] { scroll-margin-top: 160px; }
       .hero { grid-template-columns: 1fr; padding: 120px 32px 0; }
       .about { padding: 0 32px 0; grid-template-columns: 1fr; }
       .about-timeline {

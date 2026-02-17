@@ -1269,13 +1269,30 @@
         margin-left: auto;
       }
       section[id] { scroll-margin-top: 136px; }
-      .hero { grid-template-columns: 1fr; padding: 120px 32px 0; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 120px 16px 0;
+        gap: 22px;
+      }
+      .hero-text {
+        width: 100%;
+        max-width: none;
+      }
+      .hero h2,
+      .hero ul,
+      .hero-actions {
+        width: 100%;
+        max-width: 100%;
+      }
       .hero-image {
-        justify-self: start;
+        width: 100%;
+        justify-content: center;
+        justify-self: center;
         margin: 6px 0 14px;
       }
       .hero-image img {
-        max-width: 250px;
+        width: min(100%, 320px);
+        max-width: 320px;
         transform: rotate(-0.6deg);
       }
       .about { padding: 0 32px 0; grid-template-columns: 1fr; }

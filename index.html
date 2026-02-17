@@ -114,7 +114,7 @@
     .hero.hero-mobile-stack .hero-image {
       width: 100%;
       max-width: 100%;
-      justify-content: center;
+      justify-content: flex-start;
       justify-self: center;
       margin: 4px 0 10px;
     }
@@ -1315,7 +1315,7 @@
       .hero-image {
         width: 100%;
         max-width: 100%;
-        justify-content: center;
+        justify-content: flex-start;
         justify-self: center;
         margin: 4px 0 10px;
       }
@@ -1887,6 +1887,7 @@
     const hero = document.querySelector('.hero');
     const heroText = document.querySelector('.hero-text');
     const heroImage = document.querySelector('.hero-image');
+    const heroImg = heroImage ? heroImage.querySelector('img') : null;
     const heroSubtitle = heroText ? heroText.querySelector('h2') : null;
     if (!hero || !heroText || !heroImage || !heroSubtitle) return;
 
@@ -1904,6 +1905,11 @@
       heroText.style.margin = '0 auto';
       heroImage.style.width = '100%';
       heroImage.style.maxWidth = '100%';
+      if (heroImg) {
+        heroImg.style.width = '100%';
+        heroImg.style.maxWidth = 'none';
+        heroImg.style.display = 'block';
+      }
       if (heroImage.parentElement !== heroText) {
         heroText.insertBefore(heroImage, heroSubtitle);
       }
@@ -1918,6 +1924,11 @@
       heroText.style.margin = '';
       heroImage.style.width = '';
       heroImage.style.maxWidth = '';
+      if (heroImg) {
+        heroImg.style.width = '';
+        heroImg.style.maxWidth = '';
+        heroImg.style.display = '';
+      }
       if (heroImage.parentElement !== hero) hero.appendChild(heroImage);
     }
   }

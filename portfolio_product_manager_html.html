@@ -1966,6 +1966,7 @@
     const hero = document.querySelector('.hero');
     const heroText = document.querySelector('.hero-text');
     const heroImage = document.querySelector('.hero-image');
+    const heroImg = heroImage ? heroImage.querySelector('img') : null;
     const heroSubtitle = heroText ? heroText.querySelector('h2') : null;
     if (!hero || !heroText || !heroImage || !heroSubtitle) return;
 
@@ -1984,9 +1985,53 @@
       if (heroImage.parentElement !== heroText) {
         heroText.insertBefore(heroImage, heroSubtitle);
       }
+      hero.style.setProperty('display', 'block', 'important');
+      hero.style.setProperty('width', '100%', 'important');
+      hero.style.setProperty('max-width', '100vw', 'important');
+      hero.style.setProperty('padding-left', '24px', 'important');
+      hero.style.setProperty('padding-right', '24px', 'important');
+
+      heroText.style.setProperty('display', 'block', 'important');
+      heroText.style.setProperty('width', '100%', 'important');
+      heroText.style.setProperty('max-width', 'none', 'important');
+      heroText.style.setProperty('margin', '0', 'important');
+
+      heroImage.style.setProperty('display', 'block', 'important');
+      heroImage.style.setProperty('width', '100%', 'important');
+      heroImage.style.setProperty('max-width', 'none', 'important');
+      heroImage.style.setProperty('margin', '4px 0 10px', 'important');
+      heroImage.style.setProperty('justify-content', 'flex-start', 'important');
+
+      if (heroImg) {
+        heroImg.style.setProperty('display', 'block', 'important');
+        heroImg.style.setProperty('width', '100%', 'important');
+        heroImg.style.setProperty('max-width', 'none', 'important');
+      }
     } else {
       hero.classList.remove('hero-mobile-stack');
       if (heroImage.parentElement !== hero) hero.appendChild(heroImage);
+      hero.style.removeProperty('display');
+      hero.style.removeProperty('width');
+      hero.style.removeProperty('max-width');
+      hero.style.removeProperty('padding-left');
+      hero.style.removeProperty('padding-right');
+
+      heroText.style.removeProperty('display');
+      heroText.style.removeProperty('width');
+      heroText.style.removeProperty('max-width');
+      heroText.style.removeProperty('margin');
+
+      heroImage.style.removeProperty('display');
+      heroImage.style.removeProperty('width');
+      heroImage.style.removeProperty('max-width');
+      heroImage.style.removeProperty('margin');
+      heroImage.style.removeProperty('justify-content');
+
+      if (heroImg) {
+        heroImg.style.removeProperty('display');
+        heroImg.style.removeProperty('width');
+        heroImg.style.removeProperty('max-width');
+      }
     }
   }
 

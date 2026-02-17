@@ -113,6 +113,7 @@
 
     .hero.hero-mobile-stack .hero-image {
       width: 100%;
+      max-width: 100%;
       justify-content: center;
       justify-self: center;
       margin: 4px 0 10px;
@@ -1313,6 +1314,7 @@
       }
       .hero-image {
         width: 100%;
+        max-width: 100%;
         justify-content: center;
         justify-self: center;
         margin: 4px 0 10px;
@@ -1897,6 +1899,11 @@
       hero.style.paddingLeft = '24px';
       hero.style.paddingRight = '24px';
       hero.style.columnGap = '14px';
+      heroText.style.width = 'calc(100vw - 48px)';
+      heroText.style.maxWidth = 'calc(100vw - 48px)';
+      heroText.style.margin = '0 auto';
+      heroImage.style.width = '100%';
+      heroImage.style.maxWidth = '100%';
       if (heroImage.parentElement !== heroText) {
         heroText.insertBefore(heroImage, heroSubtitle);
       }
@@ -1906,6 +1913,11 @@
       hero.style.paddingLeft = '';
       hero.style.paddingRight = '';
       hero.style.columnGap = '';
+      heroText.style.width = '';
+      heroText.style.maxWidth = '';
+      heroText.style.margin = '';
+      heroImage.style.width = '';
+      heroImage.style.maxWidth = '';
       if (heroImage.parentElement !== hero) hero.appendChild(heroImage);
     }
   }

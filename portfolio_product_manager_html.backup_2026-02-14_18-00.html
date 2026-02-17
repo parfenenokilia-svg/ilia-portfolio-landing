@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Илья Парфененок — Product Manager</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #1f4f43;
+      --green-soft: rgba(31, 79, 67, 0.14);
+      --graphite: #1f1f1f;
+      --grid: rgba(31, 31, 31, 0.06);
+      --text: #2b2b2b;
+      --bg: #fbfbf9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 20px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+
+    header nav a {
+      margin-left: 32px;
+      text-decoration: none;
+      color: var(--green);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero {
+      min-height: 68vh;
+      padding: 112px 80px 40px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.7fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+    }
+
+    .section-metrics {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.28;
+    }
+
+
+    .metric-note {
+      position: absolute;
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 22px;
+      color: rgba(31, 31, 31, 0.55);
+      transform: rotate(-7deg);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 64px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .hero h2 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--green);
+    }
+
+    .hero ul {
+      list-style: none;
+      margin-bottom: 32px;
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 22px;
+    }
+
+    .hero ul li {
+      margin-bottom: 10px;
+      padding-left: 26px;
+      position: relative;
+      font-size: 22px;
+    }
+
+    .hero ul li::before {
+      content: '';
+      width: 16px;
+      height: 12px;
+      position: absolute; left: 0; top: 8px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='12' viewBox='0 0 18 12'><path d='M1 6.5 L6 10 L17 1.5' stroke='%231f1f1f' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    /* badges removed from hero */
+
+    .hero-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .hero-doodle {
+      width: 160px;
+      height: 160px;
+      justify-self: center;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><circle cx='90' cy='110' r='70' fill='none' stroke='%231f1f1f' stroke-width='4'/><path d='M90 40 A70 70 0 0 1 150 90 L90 110 Z' fill='none' stroke='%231f1f1f' stroke-width='4' stroke-linejoin='round'/><path d='M90 110 L155 110 A65 65 0 0 1 140 150 Z' fill='none' stroke='%231f1f1f' stroke-width='4' stroke-linejoin='round'/><path d='M104 64 L120 86' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M116 66 L132 88' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M110 92 L136 92' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M118 120 L150 120' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M120 132 L146 146' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M152 66 L180 50' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><circle cx='180' cy='50' r='4' fill='%231f1f1f'/></svg>");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+
+    .about {
+      padding: 0 80px 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .about p {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 21px;
+      line-height: 1.7;
+      color: #3a3a3a;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .about-doodle {
+      width: 100%;
+      max-width: 460px;
+      height: 420px;
+      justify-self: end;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='280' viewBox='0 0 360 280'><path d='M30 150 C80 80, 160 210, 240 120' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M240 120 L300 70' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M300 70 L288 76' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M300 70 L294 84' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M40 200 L40 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M70 185 L70 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M100 175 L100 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M130 165 L130 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M160 160 L160 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M190 155 L190 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M220 150 L220 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M250 145 L250 250' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .services {
+      padding: 0 80px 120px;
+    }
+
+    .cases {
+      padding: 0 80px 120px;
+    }
+
+    .cases-subtitle {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 26px;
+      color: var(--green);
+      margin: -26px 0 34px;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .case-company {
+      margin-bottom: 28px;
+    }
+
+    .case-logo {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 48px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: #111;
+      margin-bottom: 24px;
+    }
+
+    .case-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .case-item {
+      border-left: 2px solid var(--green-soft);
+      background: rgba(255,255,255,0.72);
+      padding: 20px 24px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .case-item h3 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--green);
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .case-meta {
+      font-size: 14px;
+      color: #5a5a5a;
+      margin-bottom: 10px;
+    }
+
+    .case-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .case-chip {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid rgba(31, 79, 67, 0.2);
+      background: rgba(31, 79, 67, 0.06);
+      padding: 5px 8px;
+      border-radius: 999px;
+    }
+
+    .case-details {
+      margin-top: 10px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 450ms ease, opacity 250ms ease;
+    }
+
+    .case-item.active .case-details {
+      max-height: 1400px;
+      opacity: 1;
+    }
+
+    .case-item h4 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 22px;
+      color: var(--green);
+      margin: 12px 0 6px;
+    }
+
+    .case-item p,
+    .case-item li {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .case-item ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .case-item li {
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .case-item li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .case-item::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6 L8 10 L12 6' stroke='%231f4f43' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.8;
+    }
+
+    .case-item.active::after {
+      transform: rotate(180deg);
+    }
+
+    .case-next {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .case-growth-link {
+      border: 1px solid rgba(31, 79, 67, 0.24);
+      background: rgba(31, 79, 67, 0.08);
+      color: var(--green);
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 19px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .case-growth-link:hover {
+      background: rgba(31, 79, 67, 0.14);
+      transform: translateX(2px);
+    }
+
+    .growth-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.22);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      z-index: 20;
+    }
+
+    .growth-panel {
+      position: fixed;
+      top: 76px;
+      right: 0;
+      width: min(520px, 94vw);
+      height: calc(100vh - 76px);
+      background: rgba(252, 252, 250, 0.98);
+      border-left: 2px solid var(--green-soft);
+      transform: translateX(100%);
+      transition: transform 260ms ease;
+      z-index: 21;
+      padding: 28px 24px 32px;
+      overflow-y: auto;
+    }
+
+    body.growth-open .growth-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.growth-open .growth-panel {
+      transform: translateX(0);
+    }
+
+    .growth-close {
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+      position: absolute;
+      top: 12px;
+      right: 16px;
+    }
+
+    .growth-title {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--green);
+      font-size: 34px;
+      margin: 4px 0 8px;
+      line-height: 1.1;
+      padding-right: 34px;
+    }
+
+    .growth-subtitle {
+      font-size: 14px;
+      color: #5a5a5a;
+      margin-bottom: 16px;
+    }
+
+    .growth-panel h4 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--green);
+      font-size: 24px;
+      margin: 12px 0 6px;
+    }
+
+    .growth-panel p,
+    .growth-panel li {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 20px;
+      line-height: 1.45;
+      color: #2f2f2f;
+    }
+
+    .growth-panel ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .growth-panel li {
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .growth-panel li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .cards-wrap {
+      position: relative;
+      min-height: 520px;
+      overflow: hidden;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cards-row::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .cards-row::-webkit-scrollbar-thumb {
+      background: var(--green-soft);
+      border-radius: 999px;
+    }
+
+    .cards-bg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 150px;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.20;
+    }
+
+    .cards-bg .bg-item {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .cards-bg .metric-note {
+      font-size: 20px;
+      color: rgba(31, 31, 31, 0.5);
+    }
+
+    section,
+    .divider {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-compass {
+      position: absolute;
+      width: 220px;
+      height: 130px;
+      border-radius: 50%;
+      background: #f2c24b;
+      top: -24px;
+      left: -24px;
+      z-index: 1;
+      box-shadow:
+        0 14px 40px rgba(242, 194, 75, 0.35),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .semi-circles {
+      position: absolute;
+      inset: -60px;
+      z-index: 1;
+    }
+
+    .semi-circles::before,
+    .semi-circles::after {
+      content: '';
+      position: absolute;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      border: 1px solid var(--green-soft);
+      border-radius: 50%;
+    }
+
+    .semi-circles::after {
+      width: 180%;
+      height: 180%;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--green-soft);
+      margin: 48px 0 72px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      width: 150px;
+      height: 22px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='22' viewBox='0 0 150 22'><path d='M2 11 L8 7 L12 14 L18 8 L24 12 L30 9 L36 13 L42 7 L47 12 L53 9 L58 13 L64 8 L70 14 L76 10 L82 15 L88 6 L95 13 L101 9 L108 12 L114 8 L120 14 L126 10 L132 13 L138 9 L146 12' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: 150px 22px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+
+    .section-title {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 48px;
+      letter-spacing: 0.01em;
+    }
+
+    .card {
+      min-width: 360px;
+      max-width: 420px;
+      border-left: 2px solid var(--green-soft);
+      padding: 18px 24px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(2px);
+      scroll-snap-align: start;
+      height: 130px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card h3 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 24px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .card-content {
+      margin-top: 16px;
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 20px;
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 700ms ease, opacity 400ms ease;
+    }
+
+    .card-content p { margin-bottom: 12px; }
+
+    .card-content ul { list-style: none; }
+
+    .card-content ul li {
+      margin-bottom: 8px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .card-content ul li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--green);
+      border-radius: 50%;
+      position: absolute; left: 0; top: 10px;
+    }
+
+    .card.active .card-content {
+      max-height: 1200px;
+      opacity: 1;
+    }
+
+    .card.active {
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .card.active {
+      height: auto;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6 L8 10 L12 6' stroke='%231f4f43' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+    }
+
+    .card.active::after {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 960px) {
+      header { padding: 16px 32px; }
+      .hero { grid-template-columns: 1fr; padding: 120px 32px 60px; }
+      .about { padding: 0 32px 32px; grid-template-columns: 1fr; }
+      .about-doodle { max-width: 360px; height: 260px; justify-self: start; }
+      .services { padding: 0 32px 80px; }
+      .cases { padding: 0 32px 80px; }
+      .card { min-width: 300px; max-width: 340px; height: 100px; padding: 16px 20px; }
+      .cards-wrap { min-height: 440px; }
+      .section-metrics { display: none; }
+      .cards-bg { display: none; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .case-logo { font-size: 40px; }
+      .cases-subtitle { font-size: 22px; }
+      .case-item h3 { font-size: 24px; }
+      .case-item h4 { font-size: 20px; }
+      .case-item p,
+      .case-item li { font-size: 19px; }
+      .growth-panel {
+        top: 68px;
+        height: calc(100vh - 68px);
+        width: 100vw;
+      }
+      .growth-title { font-size: 30px; }
+      .growth-panel p,
+      .growth-panel li { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <strong style="color: var(--green); font-weight: 500;">Илья Парфененок</strong>
+  <nav>
+    <a href="#about">Обо мне</a>
+    <a href="#services">Чем полезен</a>
+    <a href="#cases">Кейсы</a>
+    <a href="#">Контакты</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="section-metrics" aria-hidden="true">
+    <span class="metric-note" style="top: 150px; left: 60%; transform: rotate(-8deg);">ROMI</span>
+    <span class="metric-note" style="top: 150px; right: 2%; transform: rotate(6deg); opacity: 0.75; font-size: 28px;">CR1</span>
+    <span class="metric-note" style="bottom: 120px; right: 6%; transform: rotate(6deg);">LTV</span>
+    <span class="metric-note" style="bottom: 40px; left: 55%; transform: rotate(-6deg);">CSAT</span>
+    <span class="metric-note" style="top: 342px; left: calc(34% + 192px); transform: rotate(-6deg);">Discovery</span>
+  </div>
+  <div class="hero-text">
+    <h1>Product Manager</h1>
+    <h2>Превращаю гипотезы в продукты с измеримым результатом</h2>
+    <ul>
+      <li>8 лет в образовании, 2 года в EdTech</li>
+      <li>Запуски 0→1 и развитие продуктовых линеек</li>
+      <li>Рост через воронки, CJM и эксперименты</li>
+      <li>Управляю кросс‑функциональными командами</li>
+      <li>Сильный ownership и фокус на результате</li>
+    </ul>
+  </div>
+
+  <div class="hero-image fade delay-1">
+    <img src="photo.jpg" alt="Product Manager portrait" />
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="about" id="about">
+  <div class="section-metrics" aria-hidden="true">
+    <span class="metric-note" style="top: 10px; right: 16%; transform: rotate(6deg);">CR2</span>
+    <span class="metric-note" style="top: 78px; right: calc(24% + 144px); transform: rotate(-6deg);">NPS</span>
+    <span class="metric-note" style="bottom: 10px; right: 22%; transform: rotate(-6deg);">CJM</span>
+  </div>
+  <div class="about-text">
+    <h2 class="section-title">Обо мне</h2>
+    <p>
+      Я работаю на стыке продукта, образования и пользовательского опыта. Мой профессиональный путь начался с управления
+      ивент‑проектами: более семи лет я собирал команды, управлял процессами, бюджетами и сроками, отвечая за результат
+      в условиях высокой неопределённости. Этот опыт дал мне прочную управленческую базу и понимание того, как работать
+      с людьми. В Ростехе я погрузился в проектирование образовательных программ  — от идеи и методологии до реализации.
+      В Московской школе управления СКОЛКОВО я работал с бизнес‑аудиторией и программами для управленцев, где особенно
+      важны ценность, практичность и результат. Позже я пришёл в EdTech и начал системно развивать образовательные продукты:
+      запускать их с нуля, улучшать существующие, работать с CJM, продуктовыми метриками и ростом выручки. Мне важно
+      создавать продукты, которые действительно решают задачи пользователей и дают измеримый эффект бизнесу.
+    </p>
+  </div>
+  <div class="about-doodle" aria-hidden="true"></div>
+</section>
+
+<div class="divider"></div>
+
+<section class="services" id="services">
+  <h2 class="section-title">Чем я полезен</h2>
+  <div class="cards-wrap">
+    <div class="cards-bg" aria-hidden="true">
+      <span class="bg-item" style="top: 10px; left: 2%; width: 150px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='120' viewBox='0 0 160 120'><path d='M12 88 L50 36 L84 70 L140 28' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M20 100 L20 78' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M48 100 L48 66' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M76 100 L76 56' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M104 100 L104 46' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="bg-item" style="top: 10px; left: 34%; width: 130px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='120' viewBox='0 0 140 120'><circle cx='60' cy='60' r='40' fill='none' stroke='%231f1f1f' stroke-width='3'/><path d='M60 20 A40 40 0 0 1 98 60 L60 60 Z' fill='none' stroke='%231f1f1f' stroke-width='3'/><path d='M60 60 L104 82' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+
+      <span class="bg-item" style="top: 150px; left: calc(18% - 48px); width: 150px; height: 150px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'><path d='M20 130 L75 20 L130 130 Z' fill='none' stroke='%231f1f1f' stroke-width='3'/><path d='M34 104 L116 104' stroke='%231f1f1f' stroke-width='3'/><path d='M46 82 L104 82' stroke='%231f1f1f' stroke-width='3'/><path d='M56 60 L94 60' stroke='%231f1f1f' stroke-width='3'/></svg>&quot;);"></span>
+      <span class="bg-item" style="top: 136px; left: 46%; width: 120px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='45' cy='55' r='32' fill='none' stroke='%231f1f1f' stroke-width='3'/><circle cx='75' cy='55' r='32' fill='none' stroke='%231f1f1f' stroke-width='3'/><circle cx='60' cy='85' r='32' fill='none' stroke='%231f1f1f' stroke-width='3'/><path d='M60 55 L72 55 L66 68 Z' fill='none' stroke='%231f1f1f' stroke-width='3'/></svg>&quot;);"></span>
+      <span class="bg-item" style="top: 146px; right: calc(18% - 72px); width: 120px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><path d='M10 95 L50 95 L50 25 L80 25 L80 95 L110 95' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/><path d='M10 95 L30 75' stroke='%231f1f1f' stroke-width='3'/></svg>&quot;);"></span>
+      <span class="bg-item" style="top: 126px; right: calc(18% - 48px); width: 90px; height: 90px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'><path d='M12 70 C12 45, 30 34, 54 26' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M54 26 L46 24' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M54 26 L52 34' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+
+      <span class="bg-item" style="bottom: 188px; left: 6%; width: 70px; height: 70px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'><path d='M10 36 L24 50 L58 18' stroke='%231f1f1f' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>&quot;);"></span>
+      <span class="bg-item" style="bottom: 140px; left: 30%; width: 60px; height: 60px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><path d='M14 14 L46 46' stroke='%231f1f1f' stroke-width='4' stroke-linecap='round'/><path d='M46 14 L14 46' stroke='%231f1f1f' stroke-width='4' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="metric-note" style="top: 18px; right: 4%; transform: rotate(-4deg); letter-spacing: 0.08em;">REVENUE</span>
+
+      <span class="metric-note" style="top: 34px; left: 20%; transform: rotate(-6deg);">CR1</span>
+      <span class="metric-note" style="top: 40px; left: 54%; transform: rotate(6deg);">CAC</span>
+      <span class="bg-item" style="top: 88px; left: calc(54% + 48px); width: 110px; height: 110px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 -24 110 134'><path d='M12 -14 C28 0, 44 22, 58 46 C64 56, 68 64, 74 74' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M74 74 L64 74' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M74 74 L74 64' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="bg-item" style="top: 20px; right: calc(20% + 44px); width: 92px; height: 72px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='92' height='72' viewBox='0 0 92 72'><circle cx='20' cy='16' r='6' fill='none' stroke='%231f1f1f' stroke-width='2.5'/><path d='M12 30 C12 24, 28 24, 28 30' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><circle cx='70' cy='16' r='6' fill='none' stroke='%231f1f1f' stroke-width='2.5'/><path d='M62 30 C62 24, 78 24, 78 30' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><circle cx='46' cy='54' r='6' fill='none' stroke='%231f1f1f' stroke-width='2.5'/><path d='M38 68 C38 62, 54 62, 54 68' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><path d='M28 16 C36 10, 50 10, 58 16' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><path d='M72 28 C74 36, 66 44, 58 48' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><path d='M34 48 C26 44, 18 36, 20 28' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="metric-note" style="top: 210px; left: 8%; transform: rotate(-6deg);">CR2</span>
+      <span class="metric-note" style="top: 220px; left: 40%; transform: rotate(7deg);">Retention</span>
+      <span class="metric-note" style="top: 230px; right: calc(10% + 144px); transform: rotate(6deg);">NPS</span>
+      <span class="metric-note" style="bottom: 110px; left: calc(46% + 144px); transform: rotate(-6deg);">LTV</span>
+      <span class="metric-note" style="bottom: 110px; right: 6%; transform: rotate(8deg);">CSAT</span>
+      <span class="metric-note" style="bottom: 40px; left: calc(40% + 96px); transform: rotate(-6deg);">ROMI</span>
+      <span class="metric-note" style="bottom: 40px; right: calc(22% - 96px); transform: rotate(6deg);">CJM</span>
+      <span class="metric-note" style="bottom: 40px; left: calc(10% + 78px); transform: rotate(-7deg);">Discovery</span>
+    </div>
+    <div class="cards-row">
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Запуски продуктов 0 → 1</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Запускаю образовательные и digital‑продукты с нуля: от гипотезы до первых продаж и масштабирования.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Анализирую ЦА, емкость рынка и конкурентов</li>
+          <li>Просчитываю юнит‑экономику</li>
+          <li>Формирую ценностное предложение и УТП продукта</li>
+          <li>Проектирую CJM и воронки</li>
+          <li>Запускаю MVP и первые продажи</li>
+          <li>Проверяю гипотезы через данные</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Рост и масштабирование продуктов</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Работаю с уже существующими продуктами и нахожу точки роста в конверсиях и выручке.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Оптимирую воронки и пользовательский путь</li>
+          <li>Плотно работаю с отделами маркетинга и продаж</li>
+          <li>Пересобираю лендинги, основываясь на ЦА и её текущих болях</li>
+          <li>Ищу возможности для запуска апсейлов / кросс‑сейлов</li>
+          <li>Работаю с коммерческими, продуктовыми и маркетинговыми метриками</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Discovery и работа с пользователями</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Помогаю бизнесу перестать «гадать» и начать принимать решения на основе пользователей и данных.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Кастдев‑интервью и прослушка сделок</li>
+          <li>Формулировка и проверка продуктовых гипотез</li>
+          <li>Анализ поведения пользователей и узких мест</li>
+          <li>Подготовка инсайтов для команды и бизнеса</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Управление кросс‑функциональными командами</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Беру на себя ownership продукта и довожу задачи до результата.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Работаю с продажами, маркетингом, дизайном, разработкой</li>
+          <li>Управляю бэклогом задач и приоритизацией</li>
+          <li>Синхронизирую команды вокруг общей цели</li>
+          <li>Учитываю интересы стейкхолдеров и создаю общее инфополе</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="cases" id="cases">
+  <h2 class="section-title">Кейсы</h2>
+  <p class="cases-subtitle">Запуск и рост EdTech-продуктов</p>
+
+  <div class="cases-grid">
+    <div class="case-company">
+      <div class="case-logo">Skillbox</div>
+      <div class="case-list">
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Личные финансы</h3>
+          <p class="case-meta">Product Owner · 2024-2025 · ~10 000/мес</p>
+          <div class="case-chips">
+            <span class="case-chip">CR1 +4 п.п.</span>
+            <span class="case-chip">CR2 +3 п.п.</span>
+            <span class="case-chip">CSAT +13 п.п.</span>
+            <span class="case-chip">Revenue +40%</span>
+          </div>
+          <div class="case-details">
+            <h4>Проблема</h4>
+            <p>Линейка курсов функционировала, но продажи снижались: пользователи оставляли заявку, однако воронка и продуктовый путь не доводили до оплаты. Также требовали улучшения метрики вовлеченности и удовлетворенности действующих пользователей.</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование ЦА и конкурентного окружения, выявил ключевые барьеры покупки.</li>
+              <li>Разобрал воронку (CR1/CR2) и определил узкие места на этапах онбординга и дожима до оплаты.</li>
+              <li>Пересобрал CJM и сценарии принятия решения совместно с маркетингом и продажами.</li>
+              <li>Полностью пересобрал лендинги на основе результатов исследований.</li>
+              <li>Запустил серию growth-экспериментов на этапах онбординга и продаж.</li>
+            </ul>
+            <h4>Результат</h4>
+            <ul>
+              <li>CR1: 6% -> 10% (+4 п.п.)</li>
+              <li>CR2: 4% -> 7% (+3 п.п.)</li>
+              <li>CSAT: 78% -> 91% (+13 п.п.)</li>
+              <li>Выручка: +40% при неизменном объеме трафика</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Инвестиции в криптовалюту</h3>
+          <p class="case-meta">Product Owner · 2024-2025 · запуск за 3 месяца</p>
+          <div class="case-chips">
+            <span class="case-chip">CR1 14%</span>
+            <span class="case-chip">CR2 11%</span>
+            <span class="case-chip">ROMI 160%</span>
+            <span class="case-chip">Revenue x3</span>
+          </div>
+          <div class="case-details">
+            <h4>Проблема</h4>
+            <p>По обратной связи пользователей линейки «Личные финансы» не хватало практических знаний по криптовалютам. Запрос «обучение криптовалютам» в Wordstat был около 15 000/мес. Нужно было закрыть спрос и минимизировать юридические риски.</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование ЦА и конкурентов, уточнил пользовательские запросы и бенчмарки рынка.</li>
+              <li>Спроектировал экологичную архитектуру: сначала традиционные активы, затем модуль по крипте.</li>
+              <li>Синхронизировал концепцию с юристами и рамками безопасной коммуникации.</li>
+              <li>Собрал юнит-экономику и go-to-market стратегию с маркетингом и продажами.</li>
+              <li>Запустил MVP-лендинг и подтвердил спрос.</li>
+            </ul>
+            <h4>Результат</h4>
+            <ul>
+              <li>CR1: 14%</li>
+              <li>CR2: 11%</li>
+              <li>Выручка: x3 от плана в первые 3 месяца</li>
+              <li>ROMI: 160%</li>
+              <li>Time-to-market: запуск за 3 месяца</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="case-company">
+      <div class="case-logo">Lerna</div>
+      <div class="case-list">
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Локализация курсов под рынок Узбекистана</h3>
+          <p class="case-meta">Product Manager · Рынок: Узбекистан</p>
+          <div class="case-chips">
+            <span class="case-chip">5 направлений</span>
+            <span class="case-chip">CPL 1000 -> 300 ₽</span>
+            <span class="case-chip">MVP test</span>
+          </div>
+          <div class="case-details">
+            <h4>Проблема</h4>
+            <p>Lerna является дистрибьютором российских курсов Skillbox на рынке СНГ и входит в одноименный холдинг. Я работал на рынок Узбекистана, где значительная часть аудитории (~20-25 млн человек) не говорит на русском языке или владеет им на низком уровне. Команда рассматривала локализацию части курсов на узбекский, но перед масштабными инвестициями нужно было проверить гипотезу реального спроса.</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование рынка и выделил приоритетные направления для теста: SMM, трейдинг, бухгалтерия, финансовый анализ, 1С-разработчик.</li>
+              <li>Поставил ТЗ на сборку MVP-лендингов и создание креативов на узбекском языке.</li>
+              <li>Забрифовал локальные команды продаж и маркетинга.</li>
+              <li>Зафиксировал таргетные KPI по лидам, CPL и продажам для принятия решения по масштабированию.</li>
+              <li>Определил рекламные бюджеты совместно с маркетингом.</li>
+              <li>Регулярно собирал и анализировал обратную связь от отдела продаж.</li>
+            </ul>
+            <h4>Результат</h4>
+            <ul>
+              <li>Таргет по каждому курсу: 50 качественных лидов, из них 5 продаж.</li>
+              <li>Таргетный CPL: 1000 ₽, факт: 300 ₽.</li>
+              <li>По лидам план выполнен, но по продажам таргет не достигнут ни по одному курсу.</li>
+              <li>Гипотеза локализации в текущей модели не подтвердилась; удалось избежать затрат на полномасштабную локализацию контента и сэкономить ресурсы команды.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Как продавать на Uzum Market (запуск)</h3>
+          <p class="case-meta">Product Manager · запуск за 1 месяц</p>
+          <div class="case-chips">
+            <span class="case-chip">Local product</span>
+            <span class="case-chip">MVP launch</span>
+            <span class="case-chip">Go-to-market</span>
+          </div>
+          <div class="case-details">
+            <h4>Контекст</h4>
+            <p>После проверки гипотезы по локализации стало ясно: Lerna нужны локальные продукты на русском, которые будут драйвить выручку и усиливать позиционирование в регионе. В этот же момент Uzum Market занял ведущую роль в e-com Узбекистана. Нужно было быстро собрать релевантный продукт и вывести его на рынок.</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование ЦА и рынка, подтвердил спрос на обучение торговле на маркетплейсе.</li>
+              <li>Совместно с партнером-автором спроектировал программу и спродюсировал создание контента.</li>
+              <li>Поставил ТЗ на сборку лендингов и создание креативов.</li>
+              <li>Просчитал юнит-экономику продукта и синхронизировал модель с маркетингом и продажами.</li>
+              <li>Забрифовал локальные команды продаж и маркетинга.</li>
+              <li>Регулярно анализировал BI-отчеты и обратную связь отдела продаж.</li>
+            </ul>
+            <h4>Результат</h4>
+            <p>Первый модуль вышел через месяц после решения о запуске. Продукт вышел в рынок быстро, но продажи и выручка были около таргетных значений, без устойчивого перевыполнения.</p>
+            <div class="case-next">
+              <button type="button" class="case-growth-link" onclick="openGrowthPanel(event)">К развитию продукта →</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="growth-overlay" onclick="closeGrowthPanel()"></div>
+<aside class="growth-panel" id="growthPanel" aria-hidden="true">
+  <button type="button" class="growth-close" onclick="closeGrowthPanel()" aria-label="Закрыть">×</button>
+  <h3 class="growth-title">Как продавать на Uzum Market<br>(развитие)</h3>
+  <p class="growth-subtitle">Lerna · этап роста после запуска</p>
+  <h4>Проблема</h4>
+  <p>Я видел, что у курса высокий потенциал по выручке, поэтому начал исследовать воронки локальных EdTech-компаний и разбирать, за счет чего они растут. Параллельно работал с действующими пользователями курса: проводил кастдевы, собирал обратную связь и глубже погружался в локальный контекст и менталитет.</p>
+  <h4>Что я сделал</h4>
+  <ul>
+    <li>Провел кастдев-интервью, выявил зоны роста и новые УТП продукта.</li>
+    <li>Выстроил рабочие отношения с локальными экспертами и привлек их к доработке курса и маркетинговым активностям.</li>
+    <li>Внедрил модель прогревов в SMM.</li>
+    <li>Инициировал запись автовебинара с локальными экспертами: новый канал лидогенерации, который в течение 3 месяцев давал около 50% выручки курса.</li>
+    <li>Пересобрал юнит-экономику продукта и провел ребрифы для продаж и маркетинга.</li>
+    <li>Организовал участие компании в e-com конференциях и продумал механики вовлечения аудитории.</li>
+    <li>Увеличил долю прямого и органического трафика за счет семантических статей.</li>
+  </ul>
+  <h4>Результат (за 6 месяцев)</h4>
+  <ul>
+    <li>CR1: 4% -> 12% (+8 п.п.)</li>
+    <li>CR2: 6% -> 14% (+8 п.п.)</li>
+    <li>Выручка курса: x5</li>
+    <li>NPS: 68 -> 87 (+19 п.п.)</li>
+  </ul>
+</aside>
+
+<script>
+  function toggleCard(card) {
+    const isActive = card.classList.contains('active');
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    if (!isActive) card.classList.add('active');
+  }
+
+  function toggleCase(item) {
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.case-item').forEach(c => c.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
+  }
+
+  function openGrowthPanel(event) {
+    event.stopPropagation();
+    document.body.classList.add('growth-open');
+    document.getElementById('growthPanel').setAttribute('aria-hidden', 'false');
+  }
+
+  function closeGrowthPanel() {
+    document.body.classList.remove('growth-open');
+    document.getElementById('growthPanel').setAttribute('aria-hidden', 'true');
+  }
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closeGrowthPanel();
+  });
+</script>
+
+</body>
+</html>

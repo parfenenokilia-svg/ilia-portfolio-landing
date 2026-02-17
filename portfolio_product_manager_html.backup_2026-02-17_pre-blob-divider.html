@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Илья Парфененок — Product Manager</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #1f2328;
+      --green-soft: rgba(31, 35, 40, 0.14);
+      --accent: #e3b505;
+      --graphite: #1f1f1f;
+      --grid: rgba(31, 31, 31, 0.045);
+      --text: #2b2b2b;
+      --bg: #fbfbf9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 20px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+
+    header nav a {
+      margin-left: 32px;
+      text-decoration: none;
+      color: var(--graphite);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+      margin-left: 20px;
+    }
+
+    .lang-btn {
+      border: 1px solid rgba(31, 35, 40, 0.2);
+      background: rgba(255, 255, 251, 0.92);
+      color: var(--graphite);
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 8px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      border-color: rgba(227, 181, 5, 0.5);
+      background: rgba(227, 181, 5, 0.14);
+      color: #5b4700;
+    }
+
+    section[id] {
+      scroll-margin-top: 112px;
+    }
+
+    .hero {
+      min-height: 68vh;
+      padding: 112px 80px 40px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.7fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+    }
+
+    .section-metrics {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.24;
+    }
+
+
+    .metric-note {
+      position: absolute;
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 22px;
+      color: rgba(138, 106, 0, 0.42);
+      transform: rotate(-7deg);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 64px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .hero h2 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--green);
+    }
+
+    .hero ul {
+      list-style: none;
+      margin-bottom: 32px;
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 22px;
+    }
+
+    .hero ul li {
+      margin-bottom: 10px;
+      padding-left: 26px;
+      position: relative;
+      font-size: 22px;
+    }
+
+    .hero ul li::before {
+      content: '';
+      width: 16px;
+      height: 12px;
+      position: absolute; left: 0; top: 8px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='12' viewBox='0 0 18 12'><path d='M1 6.5 L6 10 L17 1.5' stroke='%23e3b505' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .hero-actions {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-cv {
+      display: inline-block;
+      text-decoration: none;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #5b4700;
+      border: 1px solid rgba(227, 181, 5, 0.42);
+      background: rgba(227, 181, 5, 0.16);
+      padding: 12px 18px;
+      border-radius: 999px;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .btn-cv:hover {
+      background: rgba(227, 181, 5, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .btn-contact {
+      display: inline-block;
+      text-decoration: none;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid rgba(31, 35, 40, 0.22);
+      background: rgba(255, 255, 251, 0.9);
+      padding: 12px 18px;
+      border-radius: 999px;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .btn-contact:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-1px);
+    }
+
+    /* badges removed from hero */
+
+    .hero-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .hero-doodle {
+      width: 160px;
+      height: 160px;
+      justify-self: center;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><circle cx='90' cy='110' r='70' fill='none' stroke='%231f1f1f' stroke-width='4'/><path d='M90 40 A70 70 0 0 1 150 90 L90 110 Z' fill='none' stroke='%231f1f1f' stroke-width='4' stroke-linejoin='round'/><path d='M90 110 L155 110 A65 65 0 0 1 140 150 Z' fill='none' stroke='%231f1f1f' stroke-width='4' stroke-linejoin='round'/><path d='M104 64 L120 86' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M116 66 L132 88' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M110 92 L136 92' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M118 120 L150 120' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M120 132 L146 146' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M152 66 L180 50' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><circle cx='180' cy='50' r='4' fill='%231f1f1f'/></svg>");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+
+    .about {
+      padding: 0 80px 40px;
+      display: grid;
+      grid-template-columns: 1.6fr 0.4fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .about-text {
+      max-width: none;
+    }
+
+    .about p {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 20px;
+      line-height: 1.68;
+      color: #3a3a3a;
+      text-align: left;
+    }
+
+    .about-timeline {
+      width: 100%;
+      max-width: 360px;
+      justify-self: end;
+      margin-left: 240px;
+      padding: 12px 8px 0 24px;
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .about-timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: rgba(227, 181, 5, 0.55);
+    }
+
+    .about-timeline-item {
+      position: relative;
+      padding: 0 0 8px 22px;
+    }
+
+    .about-timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .about-timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(227, 181, 5, 0.9);
+      background: #fbfbf9;
+    }
+
+    .about-timeline-period {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--graphite);
+      font-size: 21px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      opacity: 1;
+    }
+
+    .about-timeline-role {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--graphite);
+      font-size: 34px;
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .services {
+      padding: 0 80px 120px;
+    }
+
+    .cases {
+      padding: 0 80px 120px;
+    }
+
+    .recommendations {
+      padding: 0 80px 120px;
+    }
+
+    .recommendation-card {
+      border-left: 2px solid var(--green-soft);
+      background: rgba(255, 255, 251, 0.84);
+      padding: 24px 28px;
+      max-width: 1080px;
+    }
+
+    .recommendation-card + .recommendation-card {
+      margin-top: 16px;
+    }
+
+    .recommendation-accordion {
+      cursor: pointer;
+      position: relative;
+      padding-right: 56px;
+    }
+
+    .recommendation-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .recommendation-avatar {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(31, 79, 67, 0.14);
+      flex: 0 0 auto;
+    }
+
+    .recommendation-name {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .recommendation-role {
+      font-size: 15px;
+      color: #5a5a5a;
+      margin-bottom: 0;
+    }
+
+    .recommendation-role-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .recommendation-telegram {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #5b4700;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .recommendation-telegram:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .recommendation-telegram img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .recommendation-body p {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 20px;
+      line-height: 1.66;
+      color: #2f2f2f;
+      margin-bottom: 14px;
+    }
+
+    .recommendation-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .recommendation-body {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 420ms ease, opacity 260ms ease;
+    }
+
+    .recommendation-accordion.active .recommendation-body {
+      max-height: 1200px;
+      opacity: 1;
+    }
+
+    .recommendation-accordion::after {
+      content: '';
+      position: absolute;
+      right: 22px;
+      top: 30px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6 L8 10 L12 6' stroke='%23e3b505' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.8;
+      transition: transform 200ms ease;
+    }
+
+    .recommendation-accordion.active::after {
+      transform: rotate(180deg);
+    }
+
+    .contacts {
+      padding: 0 80px 120px;
+    }
+
+    .qa {
+      padding: 0 80px 88px;
+    }
+
+    .qa-list {
+      display: grid;
+      gap: 14px;
+      max-width: 1080px;
+    }
+
+    .qa-item {
+      border-left: 2px solid var(--green-soft);
+      background: rgba(255, 255, 251, 0.82);
+      padding: 16px 22px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .qa-item h3 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--green);
+      font-size: 34px;
+      line-height: 1.1;
+      font-weight: 700;
+      margin-right: 44px;
+    }
+
+    .qa-item::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      top: 24px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6 L8 10 L12 6' stroke='%231f5c4f' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.8;
+      transition: transform 180ms ease;
+    }
+
+    .qa-item.active::after {
+      transform: rotate(180deg);
+    }
+
+    .qa-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease;
+    }
+
+    .qa-content-inner {
+      padding-top: 10px;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #2d2d2d;
+      font-size: 28px;
+      line-height: 1.5;
+    }
+
+    .qa-content-inner p + p {
+      margin-top: 8px;
+    }
+
+    .qa-item.active .qa-content {
+      max-height: 360px;
+    }
+
+    .contacts-card {
+      border-left: none;
+      background: transparent;
+      padding: 0;
+      max-width: 1080px;
+    }
+
+    .contacts-text {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #2f2f2f;
+      margin-bottom: 16px;
+    }
+
+    .contacts-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .contact-link {
+      display: flex;
+      width: 58px;
+      height: 58px;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #232323;
+      border: 1px solid rgba(31, 92, 79, 0.18);
+      background: rgba(255, 255, 255, 0.4);
+      padding: 0;
+      border-radius: 50%;
+      transition: color 160ms ease, transform 160ms ease;
+    }
+
+    .contact-link:hover {
+      border-color: rgba(31, 92, 79, 0.44);
+      transform: translateY(-1px);
+    }
+
+    .contact-link img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .cases-subtitle {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 26px;
+      color: var(--green);
+      margin: -26px 0 34px;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .case-company {
+      margin-bottom: 28px;
+    }
+    .case-company-skillbox { order: 2; }
+    .case-company-lerna { order: 1; }
+
+    .case-logo {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 48px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: #111;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .case-logo-img {
+      display: block;
+      height: 36px;
+      width: auto;
+      max-width: 100%;
+    }
+
+    .case-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .case-item {
+      border-left: 2px solid var(--green-soft);
+      background: rgba(255, 255, 251, 0.82);
+      padding: 20px 24px;
+      cursor: pointer;
+      position: relative;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-item h3 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--green);
+      font-size: 24px;
+      line-height: 1.18;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .case-company:nth-child(2) .case-item h3 {
+      font-size: 24px;
+    }
+
+    .case-meta {
+      font-size: 13px;
+      color: #5a5a5a;
+      margin-bottom: 8px;
+      min-height: 34px;
+    }
+
+    .case-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 2px;
+      min-height: 28px;
+    }
+
+    .case-chip {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #5b4700;
+      border: 1px solid rgba(227, 181, 5, 0.38);
+      background: rgba(227, 181, 5, 0.14);
+      padding: 4px 7px;
+      border-radius: 999px;
+    }
+
+    .case-details {
+      margin-top: 10px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 450ms ease, opacity 250ms ease;
+    }
+
+    .case-item.active .case-details {
+      max-height: 1400px;
+      opacity: 1;
+    }
+
+    .case-item h4 {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 22px;
+      color: var(--green);
+      font-weight: 600;
+      margin: 12px 0 6px;
+    }
+
+    .case-item p,
+    .case-item li {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .case-item ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .case-item li {
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .case-item li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .case-item::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6 L8 10 L12 6' stroke='%23e3b505' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.8;
+    }
+
+    .case-item.active::after {
+      transform: rotate(180deg);
+    }
+
+    .case-next {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .case-growth-link {
+      border: 1px solid rgba(227, 181, 5, 0.38);
+      background: rgba(227, 181, 5, 0.14);
+      color: #5b4700;
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 19px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .case-growth-link:hover {
+      background: rgba(227, 181, 5, 0.22);
+      transform: translateX(2px);
+    }
+
+    .growth-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.22);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      z-index: 20;
+    }
+
+    .growth-panel {
+      position: fixed;
+      top: 76px;
+      right: 0;
+      width: min(520px, 94vw);
+      height: calc(100vh - 76px);
+      background: rgba(252, 252, 250, 0.98);
+      border-left: 2px solid var(--green-soft);
+      transform: translateX(100%);
+      transition: transform 260ms ease;
+      z-index: 21;
+      padding: 28px 24px 32px;
+      overflow-y: auto;
+    }
+
+    body.growth-open .growth-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.growth-open .growth-panel {
+      transform: translateX(0);
+    }
+
+    .growth-close {
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+      position: absolute;
+      top: 12px;
+      right: 16px;
+    }
+
+    .growth-title {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--green);
+      font-size: 34px;
+      margin: 4px 0 8px;
+      line-height: 1.1;
+      padding-right: 34px;
+    }
+
+    .growth-subtitle {
+      font-size: 14px;
+      color: #5a5a5a;
+      margin-bottom: 16px;
+    }
+
+    .growth-panel h4 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      color: var(--green);
+      font-size: 24px;
+      margin: 12px 0 6px;
+    }
+
+    .growth-panel p,
+    .growth-panel li {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 20px;
+      line-height: 1.45;
+      color: #2f2f2f;
+    }
+
+    .growth-panel ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .growth-panel li {
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .growth-panel li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .cards-wrap {
+      position: relative;
+      min-height: 46px;
+      overflow: visible;
+      transition: min-height 260ms ease;
+    }
+
+    .cards-wrap.cards-open {
+      min-height: 520px;
+    }
+
+    .services-core-metrics {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.18;
+      transition: opacity 180ms ease;
+    }
+
+    .cards-wrap.cards-open .services-core-metrics {
+      opacity: 0;
+    }
+
+    .services-core-metrics .metric-note {
+      position: absolute;
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 22px;
+      color: rgba(138, 106, 0, 0.34);
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cards-row::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .cards-row::-webkit-scrollbar-thumb {
+      background: var(--green-soft);
+      border-radius: 999px;
+    }
+
+    .cards-bg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 150px;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 260ms ease;
+    }
+
+    .cards-wrap.cards-open .cards-bg {
+      opacity: 0.13;
+    }
+
+    .cards-bg .bg-item {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: none;
+      opacity: 0.38;
+    }
+
+    .cards-bg .metric-note {
+      font-size: 20px;
+      color: rgba(138, 106, 0, 0.3);
+      display: none;
+    }
+
+    .cards-wrap.cards-open .cards-bg .bg-item.rhythm-item {
+      display: block;
+    }
+
+    .cards-wrap.cards-open .cards-bg .metric-note.rhythm-metric {
+      display: block;
+      font-size: 20px;
+      color: rgba(138, 106, 0, 0.3);
+    }
+
+    section,
+    .divider {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-compass {
+      position: absolute;
+      width: 220px;
+      height: 130px;
+      border-radius: 50%;
+      background: #f2c24b;
+      top: -24px;
+      left: -24px;
+      z-index: 1;
+      box-shadow:
+        0 14px 40px rgba(242, 194, 75, 0.35),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 12px;
+      border: 8px solid #fff;
+      box-shadow: 0 18px 28px rgba(31, 31, 31, 0.14);
+      transform: rotate(-1.3deg);
+      position: relative;
+      z-index: 2;
+    }
+
+    .semi-circles {
+      position: absolute;
+      inset: -60px;
+      z-index: 1;
+    }
+
+    .semi-circles::before,
+    .semi-circles::after {
+      content: '';
+      position: absolute;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      border: 1px solid var(--green-soft);
+      border-radius: 50%;
+    }
+
+    .semi-circles::after {
+      width: 180%;
+      height: 180%;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--green-soft);
+      margin: 48px 0 72px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .divider-tight {
+      margin: 12px 0 36px;
+    }
+
+    .divider-after-cases {
+      margin: -114px 0 72px;
+    }
+
+    .divider-after-services {
+      margin: 0 0 72px;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      width: 150px;
+      height: 22px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='22' viewBox='0 0 150 22'><path d='M2 11 L8 7 L12 14 L18 8 L24 12 L30 9 L36 13 L42 7 L47 12 L53 9 L58 13 L64 8 L70 14 L76 10 L82 15 L88 6 L95 13 L101 9 L108 12 L114 8 L120 14 L126 10 L132 13 L138 9 L146 12' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: 150px 22px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+
+    .section-title {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 48px;
+      letter-spacing: 0.01em;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 82px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(227, 181, 5, 0.72);
+    }
+
+    .card {
+      min-width: 360px;
+      max-width: 420px;
+      border-left: 2px solid var(--green-soft);
+      padding: 18px 24px;
+      cursor: pointer;
+      background: rgba(255, 255, 251, 0.82);
+      backdrop-filter: blur(2px);
+      scroll-snap-align: start;
+      height: 130px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card h3 {
+      font-family: "Noteworthy", "Kalam", cursive;
+      font-size: 24px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .card-content {
+      margin-top: 16px;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 20px;
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 700ms ease, opacity 400ms ease;
+    }
+
+    .card-content p { margin-bottom: 12px; }
+
+    .card-content ul { list-style: none; }
+
+    .card-content ul li {
+      margin-bottom: 8px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .card-content ul li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: absolute; left: 0; top: 10px;
+    }
+
+    .card.active .card-content {
+      max-height: 1200px;
+      opacity: 1;
+    }
+
+    .card.active {
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .card.active {
+      height: auto;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6 L8 10 L12 6' stroke='%23e3b505' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+    }
+
+    .card.active::after {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 960px) {
+      header { padding: 16px 32px; }
+      .lang-switch { margin-left: 10px; }
+      .hero { grid-template-columns: 1fr; padding: 120px 32px 60px; }
+      .about { padding: 0 32px 32px; grid-template-columns: 1fr; }
+      .about-timeline {
+        max-width: 100%;
+        justify-self: start;
+        margin-left: 0;
+        margin-top: 8px;
+      }
+      .about-timeline-role { font-size: 30px; }
+      .about-timeline-period { font-size: 19px; }
+      .services { padding: 0 32px 80px; }
+      .cases { padding: 0 32px 80px; }
+      .recommendations { padding: 0 32px 80px; }
+      .qa { padding: 0 32px 80px; }
+      .contacts { padding: 0 32px 80px; }
+      .card { min-width: 300px; max-width: 340px; height: 100px; padding: 16px 20px; }
+      .cards-wrap { min-height: 6px; }
+      .cards-wrap.cards-open { min-height: 440px; }
+      .services-core-metrics { display: none; }
+      .section-metrics { display: none; }
+      .cards-bg { display: none; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .case-logo { font-size: 40px; }
+      .cases-subtitle { font-size: 22px; }
+      .case-item h3 { font-size: 24px; }
+      .case-item h4 { font-size: 20px; }
+      .case-item p,
+      .case-item li { font-size: 19px; }
+      .recommendation-name { font-size: 30px; }
+      .recommendation-card p { font-size: 19px; }
+      .qa-item h3 { font-size: 28px; }
+      .qa-content-inner { font-size: 21px; }
+      .contacts-text { font-size: 19px; }
+      .growth-panel {
+        top: 68px;
+        height: calc(100vh - 68px);
+        width: 100vw;
+      }
+      .growth-title { font-size: 30px; }
+      .growth-panel p,
+      .growth-panel li { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <strong id="brand-name" style="color: var(--green); font-weight: 500;">Илья Парфененок</strong>
+  <nav>
+    <a href="#about">Обо мне</a>
+    <a href="#services">Чем полезен</a>
+    <a href="#cases">Кейсы</a>
+    <a href="#recommendations">Рекомендации</a>
+    <a href="#qa">Q&A</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <div class="lang-switch">
+    <button type="button" class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+    <button type="button" class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="section-metrics" aria-hidden="true">
+    <span class="metric-note" style="top: 152px; left: 60%; transform: rotate(-8deg);">ROMI</span>
+    <span class="metric-note" style="bottom: 120px; right: 7%; transform: rotate(6deg);">LTV</span>
+    <span class="metric-note" style="top: 342px; left: calc(34% + 192px); transform: rotate(-6deg);">Discovery</span>
+  </div>
+  <div class="hero-text">
+    <h1>Product Manager</h1>
+    <h2>Превращаю гипотезы в продукты с измеримым результатом</h2>
+    <ul>
+      <li>7 лет в образовании, 2 года в EdTech</li>
+      <li>Запуски 0→1 и развитие продуктовых линеек</li>
+      <li>Рост через воронки, CJM и эксперименты</li>
+      <li>Управляю кросс‑функциональными командами</li>
+      <li>Сильный ownership и фокус на результате</li>
+    </ul>
+    <div class="hero-actions">
+      <a class="btn-cv" href="Илья Парфененок_резюме.docx - Google Документы.pdf" id="cv-download-link" download>Скачать CV</a>
+      <a class="btn-contact" href="#contacts">Написать мне</a>
+    </div>
+  </div>
+
+  <div class="hero-image fade delay-1">
+    <img src="photo.jpg" alt="Product Manager portrait" />
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="about" id="about">
+  <div class="section-metrics" aria-hidden="true">
+    <span class="metric-note" style="top: -38px; right: 16%; transform: rotate(6deg);">CR2</span>
+    <span class="metric-note" style="top: 30px; right: calc(24% + 240px); transform: rotate(-6deg);">NPS</span>
+    <span class="metric-note" style="bottom: 10px; right: calc(22% - 96px); transform: rotate(-6deg);">CJM</span>
+  </div>
+  <div class="about-text">
+    <h2 class="section-title">Обо мне</h2>
+    <p>
+      Я работаю на стыке продукта, образования и пользовательского опыта. Мой профессиональный путь начался с управления
+      ивент‑проектами: более семи лет я собирал команды, управлял процессами, бюджетами и сроками, отвечая за результат
+      в условиях высокой неопределённости. Этот опыт дал мне прочную управленческую базу и понимание того, как работать
+      с людьми. В Ростехе я погрузился в проектирование образовательных программ  — от идеи и методологии до реализации.
+      В Московской школе управления СКОЛКОВО я работал с бизнес‑аудиторией и программами для управленцев, где особенно
+      важны ценность, практичность и результат. Позже я пришёл в EdTech и начал системно развивать образовательные продукты:
+      запускать их с нуля, улучшать существующие, работать с CJM, продуктовыми метриками и ростом выручки. Мне важно
+      создавать продукты, которые действительно решают задачи пользователей и дают измеримый эффект бизнесу.
+    </p>
+  </div>
+  <aside class="about-timeline" aria-label="Таймлайн опыта">
+    <div class="about-timeline-item">
+      <div class="about-timeline-period">2012-2019</div>
+      <div class="about-timeline-role">Ивент</div>
+    </div>
+    <div class="about-timeline-item">
+      <div class="about-timeline-period">2019-2021</div>
+      <div class="about-timeline-role">Ростех</div>
+    </div>
+    <div class="about-timeline-item">
+      <div class="about-timeline-period">2021-2022</div>
+      <div class="about-timeline-role">Сколково</div>
+    </div>
+    <div class="about-timeline-item">
+      <div class="about-timeline-period">с 2023</div>
+      <div class="about-timeline-role">EdTech</div>
+    </div>
+  </aside>
+</section>
+
+<div class="divider divider-tight"></div>
+
+<section class="services" id="services">
+  <h2 class="section-title">Чем я полезен</h2>
+  <div class="cards-wrap">
+    <div class="cards-bg" aria-hidden="true">
+      <span class="bg-item rhythm-item" style="top: 12px; left: 6%; width: 150px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='120' viewBox='0 0 160 120'><path d='M12 88 L50 36 L84 70 L140 28' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M20 100 L20 78' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M48 100 L48 66' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M76 100 L76 56' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M104 100 L104 46' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="bg-item rhythm-item" style="top: 8px; left: 35%; width: 130px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='120' viewBox='0 0 140 120'><circle cx='60' cy='60' r='40' fill='none' stroke='%231f1f1f' stroke-width='3'/><path d='M60 20 A40 40 0 0 1 98 60 L60 60 Z' fill='none' stroke='%231f1f1f' stroke-width='3'/><path d='M60 60 L104 82' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="bg-item rhythm-item" style="top: 24px; right: 25%; width: 92px; height: 72px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='92' height='72' viewBox='0 0 92 72'><circle cx='20' cy='16' r='6' fill='none' stroke='%231f1f1f' stroke-width='2.5'/><path d='M12 30 C12 24, 28 24, 28 30' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><circle cx='70' cy='16' r='6' fill='none' stroke='%231f1f1f' stroke-width='2.5'/><path d='M62 30 C62 24, 78 24, 78 30' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><circle cx='46' cy='54' r='6' fill='none' stroke='%231f1f1f' stroke-width='2.5'/><path d='M38 68 C38 62, 54 62, 54 68' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><path d='M28 16 C36 10, 50 10, 58 16' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><path d='M72 28 C74 36, 66 44, 58 48' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/><path d='M34 48 C26 44, 18 36, 20 28' fill='none' stroke='%231f1f1f' stroke-width='2.5' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="bg-item rhythm-item" style="top: 136px; left: 43%; width: 120px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='45' cy='55' r='32' fill='none' stroke='%231f1f1f' stroke-width='3'/><circle cx='75' cy='55' r='32' fill='none' stroke='%231f1f1f' stroke-width='3'/><circle cx='60' cy='85' r='32' fill='none' stroke='%231f1f1f' stroke-width='3'/><path d='M60 55 L72 55 L66 68 Z' fill='none' stroke='%231f1f1f' stroke-width='3'/></svg>&quot;);"></span>
+      <span class="bg-item rhythm-item" style="top: 92px; left: 56%; width: 110px; height: 110px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 -24 110 134'><path d='M12 -14 C28 0, 44 22, 58 46 C64 56, 68 64, 74 74' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M74 74 L64 74' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M74 74 L74 64' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+      <span class="bg-item rhythm-item" style="top: 148px; right: 10%; width: 120px; height: 120px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><path d='M10 95 L50 95 L50 25 L80 25 L80 95 L110 95' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/><path d='M10 95 L30 75' stroke='%231f1f1f' stroke-width='3'/></svg>&quot;);"></span>
+      <span class="bg-item rhythm-item" style="top: 124px; right: 11%; width: 90px; height: 90px; background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'><path d='M12 70 C12 45, 30 34, 54 26' stroke='%231f1f1f' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M54 26 L46 24' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/><path d='M54 26 L52 34' stroke='%231f1f1f' stroke-width='3' stroke-linecap='round'/></svg>&quot;);"></span>
+
+      <span class="metric-note rhythm-metric" style="top: 174px; left: calc(14% - 144px); transform: rotate(-6deg);">CR1</span>
+      <span class="metric-note rhythm-metric" style="top: 36px; left: 48%; transform: rotate(5deg);">CAC</span>
+      <span class="metric-note rhythm-metric" style="top: 40px; right: 9%; transform: rotate(-4deg); letter-spacing: 0.08em;">REVENUE</span>
+      <span class="metric-note rhythm-metric" style="top: 174px; left: 24%; transform: rotate(6deg);">Retention</span>
+      <span class="metric-note rhythm-metric" style="top: 196px; left: 65%; transform: rotate(-5deg);">NPS</span>
+    </div>
+    <div class="cards-row">
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Запуски продуктов 0 → 1</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Запускаю образовательные и digital‑продукты с нуля: от гипотезы до первых продаж и масштабирования.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Анализирую ЦА, ёмкость рынка и конкурентов</li>
+          <li>Просчитываю юнит‑экономику</li>
+          <li>Формирую ценностное предложение и УТП продукта</li>
+          <li>Проектирую CJM и воронки</li>
+          <li>Запускаю MVP и первые продажи</li>
+          <li>Проверяю гипотезы через данные</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Рост и масштабирование продуктов</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Работаю с уже существующими продуктами и нахожу точки роста в конверсиях и выручке.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Оптимизирую воронки и пользовательский путь</li>
+          <li>Плотно работаю с отделами маркетинга и продаж</li>
+          <li>Пересобираю лендинги, основываясь на ЦА и её текущих болях</li>
+          <li>Ищу возможности для запуска апсейлов / кросс‑сейлов</li>
+          <li>Работаю с коммерческими, продуктовыми и маркетинговыми метриками</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Discovery и работа с пользователями</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Помогаю бизнесу перестать «гадать» и начать принимать решения на основе пользователей и данных.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Кастдев‑интервью и прослушка сделок</li>
+          <li>Формулировка и проверка продуктовых гипотез</li>
+          <li>Анализ поведения пользователей и узких мест</li>
+          <li>Подготовка инсайтов для команды и бизнеса</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Управление кросс‑функциональными командами</h3>
+      <div class="card-content">
+        <div class="card-content-inner">
+        <p>Беру на себя ownership продукта и довожу задачи до результата.</p>
+        <p><strong>Что делаю:</strong></p>
+        <ul>
+          <li>Работаю с продажами, маркетингом, дизайном, разработкой</li>
+          <li>Управляю бэклогом задач и приоритизацией</li>
+          <li>Синхронизирую команды вокруг общей цели</li>
+          <li>Учитываю интересы стейкхолдеров и создаю общее инфополе</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="services-core-metrics" aria-hidden="true">
+      <span class="metric-note" style="top: 202px; left: 12%; transform: rotate(-6deg);">CR1</span>
+      <span class="metric-note" style="top: -88px; left: 45%; transform: rotate(5deg);">REVENUE</span>
+      <span class="metric-note" style="top: 202px; right: 11%; transform: rotate(-4deg);">CAC</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider divider-after-services"></div>
+
+<section class="cases" id="cases">
+  <span class="metric-note" style="top: 6px; left: calc(80px + 528px); transform: rotate(-5deg); opacity: 0.28;">CSAT</span>
+  <h2 class="section-title">Кейсы</h2>
+  <p class="cases-subtitle">Запуск и рост EdTech-продуктов</p>
+
+  <div class="cases-grid">
+    <div class="case-company case-company-skillbox">
+      <div class="case-logo" aria-label="Skillbox">
+        <img class="case-logo-img" src="skillbox-logo-new.png" alt="Skillbox logo">
+      </div>
+      <div class="case-list">
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Линейка курсов «Личные финансы»</h3>
+          <p class="case-meta">Product Owner · 2024-2025 · Трафик ~10 000/мес</p>
+          <div class="case-chips">
+            <span class="case-chip">CR1 +5 п.п.</span>
+            <span class="case-chip">CR2 +4 п.п.</span>
+            <span class="case-chip">CSAT +15 п.п.</span>
+            <span class="case-chip">Revenue +40%</span>
+          </div>
+          <div class="case-details">
+            <h4>Контекст</h4>
+            <p>Линейка курсов функционировала, но продажи снижались: пользователи оставляли заявку, однако воронка и продуктовый путь не доводили до оплаты. Также требовали улучшения метрики вовлеченности и удовлетворенности действующих пользователей.</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование ЦА и конкурентного окружения, выявил ключевые барьеры покупки.</li>
+              <li>Разобрал воронку (CR1/CR2) и определил узкие места на этапах онбординга и дожима до оплаты.</li>
+              <li>Пересобрал CJM и сценарии принятия решения совместно с маркетингом и продажами.</li>
+              <li>Полностью пересобрал лендинги на основе результатов исследований.</li>
+              <li>Запустил серию growth-экспериментов на этапах онбординга и продаж.</li>
+            </ul>
+            <h4>Результат</h4>
+            <ul>
+              <li>CR1: 6% -> 11% (+5 п.п.)</li>
+              <li>CR2: 4% -> 8% (+4 п.п.)</li>
+              <li>CSAT: 78% -> 93% (+15 п.п.)</li>
+              <li>Выручка: +40% при неизменном объеме трафика</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Курс «Инвестиции в криптовалюту»</h3>
+          <p class="case-meta">Product Owner · 2024-2025 · запуск за 3 месяца</p>
+          <div class="case-chips">
+            <span class="case-chip">0→1 запуск</span>
+            <span class="case-chip">CR1 14%</span>
+            <span class="case-chip">CR2 11%</span>
+            <span class="case-chip">ROMI 160%</span>
+            <span class="case-chip">Revenue x3</span>
+          </div>
+          <div class="case-details">
+            <h4>Контекст</h4>
+            <p>Обратная связь пользователей линейки «Личные финансы» говорила о том, что им не хватает практических знаний по криптовалютам, к тому же запрос «обучение криптовалютам» в Wordstat был около 15 000/мес. Нужно было закрыть спрос рынка и минимизировать юридические риски, так как тема криптовалют является довольно «скользкой».</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование ЦА и конкурентов, уточнил пользовательские запросы и бенчмарки рынка.</li>
+              <li>Спроектировал экологичную архитектуру: сначала традиционные активы, затем модуль по крипте.</li>
+              <li>Синхронизировал концепцию с юристами и рамками безопасной коммуникации.</li>
+              <li>Собрал юнит-экономику и go-to-market стратегию с маркетингом и продажами.</li>
+              <li>Запустил MVP-лендинг и подтвердил спрос.</li>
+            </ul>
+            <h4>Результат</h4>
+            <ul>
+              <li>CR1: 14%</li>
+              <li>CR2: 11%</li>
+              <li>Выручка: x3 от плана в первые 3 месяца</li>
+              <li>ROMI: 160%</li>
+              <li>Time-to-market: запуск за 3 месяца</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="case-company case-company-lerna">
+      <div class="case-logo" aria-label="Lerna">
+        <img class="case-logo-img" src="lerna-logo.png" alt="Lerna logo">
+      </div>
+      <div class="case-list">
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Локализация курсов под рынок Узбекистана</h3>
+          <p class="case-meta">Product Manager · 2023</p>
+          <div class="case-chips">
+            <span class="case-chip">5 направлений</span>
+            <span class="case-chip">CPL 1000 -> 300 ₽</span>
+            <span class="case-chip">MVP test</span>
+          </div>
+          <div class="case-details">
+            <h4>Контекст</h4>
+            <p>Lerna является дистрибьютором российских курсов Skillbox на рынке СНГ и входит в одноименный холдинг. Я работал на рынке Узбекистана, где значительная часть аудитории (~20-25 млн человек) не говорит на русском языке или владеет им на низком уровне. Команда рассматривала локализацию части курсов на узбекский, но перед масштабными инвестициями нужно было проверить гипотезу реального спроса.</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование рынка и выделил приоритетные направления для теста: SMM, трейдинг, бухгалтерия, финансовый анализ, 1С-разработчик.</li>
+              <li>Поставил ТЗ на сборку MVP-лендингов и создание креативов на узбекском языке.</li>
+              <li>Забрифовал локальные команды продаж и маркетинга.</li>
+              <li>Зафиксировал таргетные KPI по лидам, CPL и продажам для принятия решения по масштабированию.</li>
+              <li>Определил рекламные бюджеты совместно с маркетингом.</li>
+              <li>Регулярно собирал и анализировал обратную связь от отдела продаж.</li>
+            </ul>
+            <h4>Результат</h4>
+            <ul>
+              <li>Таргет по каждому курсу: 50 качественных лидов, из них 5 продаж.</li>
+              <li>Таргетный CPL: 1000 ₽, факт: 300 ₽.</li>
+              <li>По лидам план выполнен, но по продажам таргет не достигнут ни по одному курсу.</li>
+              <li>Гипотеза локализации в текущей модели не подтвердилась; удалось избежать затрат на полномасштабную локализацию контента и сэкономить ресурсы команды.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case-item" onclick="toggleCase(this)">
+          <h3>Курс «Как продавать на Uzum Market»</h3>
+          <p class="case-meta">Product Manager · 2023-2024</p>
+          <div class="case-chips">
+            <span class="case-chip">0→1 запуск</span>
+            <span class="case-chip">Local product</span>
+            <span class="case-chip">MVP launch</span>
+            <span class="case-chip">Go-to-market</span>
+          </div>
+          <div class="case-details">
+            <h4>Контекст</h4>
+            <p>После проверки гипотезы по локализации стало ясно: Lerna нужны локальные продукты на русском, которые будут драйвить выручку и усиливать позиционирование в регионе. В этот же момент Uzum Market занял ведущую роль в e-com Узбекистана. Нужно было быстро собрать релевантный продукт и вывести его на рынок.</p>
+            <h4>Что я сделал</h4>
+            <ul>
+              <li>Провел исследование ЦА и рынка, подтвердил спрос на обучение торговле на маркетплейсе.</li>
+              <li>Совместно с партнером-автором спроектировал программу и спродюсировал создание контента.</li>
+              <li>Поставил ТЗ на сборку лендингов и создание креативов.</li>
+              <li>Просчитал юнит-экономику продукта и синхронизировал модель с маркетингом и продажами.</li>
+              <li>Забрифовал локальные команды продаж и маркетинга.</li>
+              <li>Регулярно анализировал BI-отчеты и обратную связь отдела продаж.</li>
+            </ul>
+            <h4>Результат</h4>
+            <p>Первый модуль вышел через месяц после решения о запуске. Продукт вышел в рынок быстро, но продажи и выручка были около таргетных значений, без устойчивого перевыполнения.</p>
+            <div class="case-next">
+              <button type="button" class="case-growth-link" onclick="openGrowthPanel(event)">К развитию продукта →</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider divider-after-cases"></div>
+
+<section class="recommendations" id="recommendations">
+  <h2 class="section-title">Рекомендации</h2>
+  <article class="recommendation-card recommendation-accordion" onclick="toggleRecommendation(this)">
+    <div class="recommendation-head">
+      <img class="recommendation-avatar" src="edita.jpeg" alt="Эдита Анциферова" onerror="this.style.display='none'">
+      <div>
+        <h3 class="recommendation-name">Эдита Анциферова</h3>
+        <div class="recommendation-role-row">
+          <p class="recommendation-role">Business Development Director, Lerna</p>
+          <a class="recommendation-telegram" href="https://t.me/editaanciferova" target="_blank" rel="noopener noreferrer" aria-label="Telegram Эдиты Анциферовой">
+            <img src="icons8-телеграм-50.png" alt="Telegram">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="recommendation-body">
+      <p>Илья работал с нами в Lerna (Skillbox CIS) над направлением Узбекистана, отвечая за развитие продукта на этом рынке и взаимодействуя с головным офисом в Минске.</p>
+      <p>Несмотря на то что на момент прихода у Ильи не было опыта в EdTech, он быстро погрузился в специфику отрасли и уже в первые месяцы начал показывать заметные результаты. Он оперативно разобрался в продуктовых и коммерческих метриках бизнеса и начал системно влиять на них через структурированную работу с гипотезами и данными.</p>
+      <p>Работая удалённо, Илья проявил высокий уровень самостоятельности и ответственности. Он эффективно координировал кросс-функциональную команду, удерживал фокус на измеримом результате и выстраивал взаимодействие между продуктом, маркетингом и продажами. Также он выстроил продуктивную коммуникацию с локальными партнёрами и регулярно предлагал идеи, усиливающие продукт и его позиционирование на рынке.</p>
+      <p>Считаю Илью ценным продуктовым специалистом с выраженным бизнес-мышлением. Он способен быстро адаптироваться к новым условиям, самостоятельно вести направление и последовательно влиять на ключевые показатели бизнеса. Рекомендую его как профессионала, способного усиливать продукт и масштабировать результаты.</p>
+    </div>
+  </article>
+  <article class="recommendation-card recommendation-accordion" onclick="toggleRecommendation(this)">
+    <div class="recommendation-head">
+      <img class="recommendation-avatar" src="nikolay.jpg" alt="Николай Смирнов" onerror="this.style.display='none'">
+      <div>
+        <h3 class="recommendation-name">Николай Смирнов</h3>
+        <div class="recommendation-role-row">
+          <p class="recommendation-role">Program Director, Skillbox</p>
+          <a class="recommendation-telegram" href="https://t.me/smirnov606" target="_blank" rel="noopener noreferrer" aria-label="Telegram Николая Смирнова">
+            <img src="icons8-телеграм-50.png" alt="Telegram">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="recommendation-body">
+      <p>Илья работал в моей команде над развитием линейки «Личные финансы» и отвечал за рост продуктовых и коммерческих показателей. На старте перед ним стояла задача улучшить результаты линейки, где прежние офферы и сценарии перестали давать нужный эффект.</p>
+      <p>Его сильная сторона — глубокое погружение в продукт и системная работа с гипотезами. Илья быстро разобрался в проблемных зонах воронки, пересобрал упаковку и офферы, выстроил взаимодействие между продуктом, маркетингом и продажами и обеспечил внедрение решений в работу команды.</p>
+      <p>По итогам этой работы конверсии и выручка линейки заметно выросли, а пользовательский опыт и качество продукта стали сильнее.</p>
+      <p>Отдельно отмечу его ответственность, фокус на результате и надежность в удаленном формате: он держит договоренности, дедлайны и устойчиво работает на бизнес-цели.</p>
+    </div>
+  </article>
+  <article class="recommendation-card recommendation-accordion" onclick="toggleRecommendation(this)">
+    <div class="recommendation-head">
+      <img class="recommendation-avatar" src="katya.jpg" alt="Екатерина Туркевич" onerror="this.style.display='none'">
+      <div>
+        <h3 class="recommendation-name">Екатерина Туркевич</h3>
+        <div class="recommendation-role-row">
+          <p class="recommendation-role">Методист, Skillbox</p>
+          <a class="recommendation-telegram" href="https://t.me/katya_turkevich" target="_blank" rel="noopener noreferrer" aria-label="Telegram Екатерины Туркевич">
+            <img src="icons8-телеграм-50.png" alt="Telegram">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="recommendation-body">
+      <p>Работала с Ильей на курсах по инвестициям и трейдингу и могу сказать, что это продакт, которому действительно не всё равно на продукт.</p>
+      <p>Он глубоко погружается в детали: от структуры программы до пользовательского пути и воронки. В работе с экспертами умеет аргументированно отстаивать позицию, когда речь идёт о качестве и ценности для пользователя, при этом остается конструктивным и открытым к диалогу.</p>
+      <p>В командной работе Илья сфокусирован на результате: задает точные вопросы и помогает смотреть на продукт шире. Его решения опираются на данные и понимание аудитории.</p>
+      <p>Рекомендую Илью как зрелого и думающего продакта, который сочетает стратегическое мышление и внимание к деталям.</p>
+    </div>
+  </article>
+</section>
+
+<div class="divider"></div>
+
+<section class="qa" id="qa">
+  <h2 class="section-title">Q&A</h2>
+  <div class="qa-list">
+    <article class="qa-item" onclick="toggleQa(this)">
+      <h3>Что я ищу?</h3>
+      <div class="qa-content">
+        <div class="qa-content-inner">
+          <p>Ищу роль Product Manager / Growth Product Manager в EdTech или других доменах.</p>
+          <p>Меня драйвит рост коммерческих метрик и выручки при сохранении качества продукта.</p>
+          <p>Интересны команды, где есть сильная кросс-функциональная работа и пространство для экспериментов.</p>
+          <p>Рассчитываю на долгосрочное сотрудничество.</p>
+        </div>
+      </div>
+    </article>
+    <article class="qa-item" onclick="toggleQa(this)">
+      <h3>Какой формат работы мне подходит?</h3>
+      <div class="qa-content">
+        <div class="qa-content-inner">
+          <p>Полный рабочий день, удаленно.</p>
+          <p>Базируюсь в Италии, открыт к международным командам и проектам в разных часовых поясах.</p>
+        </div>
+      </div>
+    </article>
+    <article class="qa-item" onclick="toggleQa(this)">
+      <h3>Какими языками я владею?</h3>
+      <div class="qa-content">
+        <div class="qa-content-inner">
+          <p>Русский — родной, английский — Upper-Intermediate, итальянский — начальный.</p>
+        </div>
+      </div>
+    </article>
+    <article class="qa-item" onclick="toggleQa(this)">
+      <h3>Мои хобби?</h3>
+      <div class="qa-content">
+        <div class="qa-content-inner">
+          <p>На протяжении 4 лет регулярно занимаюсь силовыми тренировками, играю на классической гитаре, с недавнего времени изучаю итальянский.</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="contacts" id="contacts">
+  <h2 class="section-title">Контакты</h2>
+  <div class="contacts-card">
+    <p class="contacts-text">Открыт к предложениям на роли Product Manager/Growth Product Manager. Буду рад обсудить ваши кейсы и помочь достичь желаемых бизнес-результатов.</p>
+    <div class="contacts-links">
+      <a class="contact-link" href="https://t.me/ilya_9010" target="_blank" rel="noopener noreferrer" aria-label="Telegram Ильи Парфененка">
+        <img src="icons8-телеграм-50.png" alt="">
+        <span class="sr-only">Telegram</span>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/ilia-parfenenok-b3a678264/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Ильи Парфененка">
+        <img src="LI-In-Bug.png" alt="">
+        <span class="sr-only">LinkedIn</span>
+      </a>
+      <a class="contact-link" href="mailto:parfenenok.ilia@gmail.com" aria-label="Email Ильи Парфененка">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'><path fill='%23232323' d='M3 6.75A2.75 2.75 0 0 1 5.75 4h12.5A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25zm2.2-.25L12 11.22l6.8-4.72H5.2Zm13.3 1.46l-6.22 4.32a.5.5 0 0 1-.56 0L5.5 7.96v9.29c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25V7.96Z'/></svg>" alt="">
+        <span class="sr-only">Email</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="growth-overlay" onclick="closeGrowthPanel()"></div>
+<aside class="growth-panel" id="growthPanel" aria-hidden="true">
+  <button type="button" class="growth-close" onclick="closeGrowthPanel()" aria-label="Закрыть">×</button>
+  <h3 class="growth-title">Как продавать на Uzum Market<br>(развитие)</h3>
+  <p class="growth-subtitle">Lerna · этап роста после запуска</p>
+  <h4>Контекст</h4>
+  <p>Я видел, что у курса высокий потенциал по выручке, поэтому начал исследовать воронки локальных EdTech-компаний и разбирать, за счет чего они растут. Параллельно работал с действующими пользователями курса: проводил кастдевы, собирал обратную связь и глубже погружался в локальный контекст и менталитет.</p>
+  <h4>Что я сделал</h4>
+  <ul>
+    <li>Провел кастдев-интервью, выявил зоны роста и новые УТП продукта.</li>
+    <li>Выстроил рабочие отношения с локальными экспертами и привлек их к доработке курса и маркетинговым активностям.</li>
+    <li>Внедрил модель прогревов в SMM.</li>
+    <li>Инициировал запись автовебинара с локальными экспертами: новый канал лидогенерации, который в течение 3 месяцев давал около 50% выручки курса.</li>
+    <li>Пересобрал юнит-экономику продукта и провел ребрифы для продаж и маркетинга.</li>
+    <li>Организовал участие компании в e-com конференциях и продумал механики вовлечения аудитории.</li>
+    <li>Инициировал запуск SEO-контента, что привело к росту доли прямого и органического трафика.</li>
+  </ul>
+  <h4>Результат (за 6 месяцев)</h4>
+  <ul>
+    <li>Трафик: 1700 -> 4100</li>
+    <li>CR1: 4% -> 11% (+7 п.п.)</li>
+    <li>CR2: 6% -> 12% (+6 п.п.)</li>
+    <li>Выручка курса: x5</li>
+    <li>CSAT: 72 -> 91% (+19 п.п.)</li>
+  </ul>
+</aside>
+
+<script>
+  function toggleCard(card) {
+    const isActive = card.classList.contains('active');
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    if (!isActive) card.classList.add('active');
+    const wrap = document.querySelector('.cards-wrap');
+    if (!wrap) return;
+    const hasActive = !!document.querySelector('.card.active');
+    wrap.classList.toggle('cards-open', hasActive);
+  }
+
+  function toggleCase(item) {
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.case-item').forEach(c => c.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
+  }
+
+  function toggleRecommendation(item) {
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.recommendation-accordion').forEach(c => c.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
+  }
+
+  function toggleQa(item) {
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.qa-item').forEach(c => c.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
+  }
+
+  function openGrowthPanel(event) {
+    event.stopPropagation();
+    document.body.classList.add('growth-open');
+    document.getElementById('growthPanel').setAttribute('aria-hidden', 'false');
+  }
+
+  function closeGrowthPanel() {
+    document.body.classList.remove('growth-open');
+    document.getElementById('growthPanel').setAttribute('aria-hidden', 'true');
+  }
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closeGrowthPanel();
+  });
+
+  const i18nState = { captured: false, ru: {} };
+  const ruCvFile = 'Илья Парфененок_резюме.docx - Google Документы.pdf';
+  const enCvFile = 'Ilia Parfenenok_CV.pdf';
+
+  function captureRuState() {
+    if (i18nState.captured) return;
+    i18nState.ru.nav = Array.from(document.querySelectorAll('header nav a')).map(el => el.textContent);
+    i18nState.ru.hero = {
+      h1: document.querySelector('.hero h1')?.textContent || '',
+      h2: document.querySelector('.hero h2')?.textContent || '',
+      bullets: Array.from(document.querySelectorAll('.hero ul li')).map(el => el.textContent),
+      cvBtn: document.getElementById('cv-download-link')?.textContent || '',
+      contactBtn: document.querySelector('.btn-contact')?.textContent || ''
+    };
+    i18nState.ru.about = {
+      title: document.querySelector('#about .section-title')?.textContent || '',
+      text: document.querySelector('#about .about-text p')?.textContent || '',
+      periods: Array.from(document.querySelectorAll('.about-timeline-period')).map(el => el.textContent),
+      roles: Array.from(document.querySelectorAll('.about-timeline-role')).map(el => el.textContent)
+    };
+    i18nState.ru.services = {
+      title: document.querySelector('#services .section-title')?.textContent || '',
+      cardTitles: Array.from(document.querySelectorAll('#services .card h3')).map(el => el.textContent),
+      cardBodies: Array.from(document.querySelectorAll('#services .card .card-content-inner')).map(el => el.innerHTML)
+    };
+    i18nState.ru.cases = {
+      title: document.querySelector('#cases .section-title')?.textContent || '',
+      subtitle: document.querySelector('#cases .cases-subtitle')?.textContent || '',
+      caseTitles: Array.from(document.querySelectorAll('#cases .case-item > h3')).map(el => el.textContent),
+      caseMeta: Array.from(document.querySelectorAll('#cases .case-item > .case-meta')).map(el => el.textContent),
+      caseChips: Array.from(document.querySelectorAll('#cases .case-item > .case-chips')).map(el => el.innerHTML),
+      caseDetails: Array.from(document.querySelectorAll('#cases .case-item > .case-details')).map(el => el.innerHTML)
+    };
+    i18nState.ru.recommendations = {
+      title: document.querySelector('#recommendations .section-title')?.textContent || '',
+      roles: Array.from(document.querySelectorAll('#recommendations .recommendation-role')).map(el => el.textContent),
+      bodies: Array.from(document.querySelectorAll('#recommendations .recommendation-body')).map(el => el.innerHTML)
+    };
+    i18nState.ru.qa = {
+      title: document.querySelector('#qa .section-title')?.textContent || '',
+      questions: Array.from(document.querySelectorAll('#qa .qa-item h3')).map(el => el.textContent),
+      answers: Array.from(document.querySelectorAll('#qa .qa-content-inner')).map(el => el.innerHTML)
+    };
+    i18nState.ru.contacts = {
+      title: document.querySelector('#contacts .section-title')?.textContent || '',
+      text: document.querySelector('#contacts .contacts-text')?.textContent || ''
+    };
+    i18nState.ru.growth = {
+      title: document.querySelector('#growthPanel .growth-title')?.innerHTML || '',
+      subtitle: document.querySelector('#growthPanel .growth-subtitle')?.textContent || '',
+      blocks: Array.from(document.querySelectorAll('#growthPanel h4, #growthPanel > p, #growthPanel li')).map(el => ({ tag: el.tagName, html: el.innerHTML }))
+    };
+    i18nState.captured = true;
+  }
+
+  function applyEn() {
+    const nav = document.querySelectorAll('header nav a');
+    const navEn = ['About', 'How I Help', 'Cases', 'Recommendations', 'Q&A', 'Contacts'];
+    nav.forEach((el, i) => { if (navEn[i]) el.textContent = navEn[i]; });
+
+    document.querySelector('.hero h1').textContent = 'Product Manager';
+    document.querySelector('.hero h2').textContent = 'Turning hypotheses into products with measurable results';
+    const heroBulletsEn = [
+      '7 years in education, 2 years in EdTech',
+      '0→1 launches and product line growth',
+      'Growth via funnels, CJM and experiments',
+      'Leading cross-functional teams',
+      'Strong ownership and focus on results'
+    ];
+    document.querySelectorAll('.hero ul li').forEach((el, i) => { if (heroBulletsEn[i]) el.textContent = heroBulletsEn[i]; });
+    document.getElementById('cv-download-link').textContent = 'Download CV';
+    document.querySelector('.btn-contact').textContent = 'Contact Me';
+    document.getElementById('brand-name').textContent = 'Ilia Parfenenok';
+    document.getElementById('cv-download-link').setAttribute('href', enCvFile);
+
+    document.querySelector('#about .section-title').textContent = 'About';
+    document.querySelector('#about .about-text p').textContent =
+      'I work at the intersection of product, education, and user experience. My career started in event projects: for over seven years I built teams, managed processes, budgets, and deadlines, and delivered results in high-uncertainty environments. This gave me a strong management foundation and a practical understanding of working with people. At Rostec, I focused on educational program design from concept and methodology to delivery. At SKOLKOVO Moscow School of Management, I worked with business audiences and executive programs where value, practicality, and outcomes are critical. Later, I moved into EdTech and started systematically developing educational products: launching from scratch, improving existing products, working with CJM, product metrics, and revenue growth. I care about building products that solve real user problems and create measurable business impact.';
+    const periodsEn = ['2012-2019', '2019-2021', '2021-2022', 'since 2023'];
+    const rolesEn = ['Events', 'Rostec', 'SKOLKOVO', 'EdTech'];
+    document.querySelectorAll('.about-timeline-period').forEach((el, i) => { if (periodsEn[i]) el.textContent = periodsEn[i]; });
+    document.querySelectorAll('.about-timeline-role').forEach((el, i) => { if (rolesEn[i]) el.textContent = rolesEn[i]; });
+
+    document.querySelector('#services .section-title').textContent = 'How I Help';
+    const serviceTitlesEn = [
+      'Product Launches 0→1',
+      'Product Growth and Scaling',
+      'Discovery and User Research',
+      'Cross-functional Team Management'
+    ];
+    document.querySelectorAll('#services .card h3').forEach((el, i) => { if (serviceTitlesEn[i]) el.textContent = serviceTitlesEn[i]; });
+    const serviceBodiesEn = [
+      '<p>I launch educational and digital products from hypothesis to first sales and scaling.</p><p><strong>What I do:</strong></p><ul><li>Analyze target audience, market size, and competitors</li><li>Build unit economics</li><li>Shape product value proposition and positioning</li><li>Design CJM and conversion funnels</li><li>Launch MVP and first sales</li><li>Validate hypotheses through data</li></ul>',
+      '<p>I work with existing products and find growth points in conversion and revenue.</p><p><strong>What I do:</strong></p><ul><li>Optimize funnels and user journey</li><li>Work closely with marketing and sales</li><li>Rebuild landing pages based on audience pains</li><li>Identify upsell and cross-sell opportunities</li><li>Work with commercial, product, and marketing metrics</li></ul>',
+      '<p>I help businesses stop guessing and make decisions based on users and data.</p><p><strong>What I do:</strong></p><ul><li>Customer development interviews and sales call listening</li><li>Formulation and validation of product hypotheses</li><li>Behavior analysis and bottleneck detection</li><li>Preparing insights for the team and business</li></ul>',
+      '<p>I take ownership and drive initiatives to outcomes.</p><p><strong>What I do:</strong></p><ul><li>Work with sales, marketing, design, and engineering</li><li>Manage backlog and prioritization</li><li>Align teams around shared goals</li><li>Balance stakeholder interests and maintain shared context</li></ul>'
+    ];
+    document.querySelectorAll('#services .card .card-content-inner').forEach((el, i) => { if (serviceBodiesEn[i]) el.innerHTML = serviceBodiesEn[i]; });
+
+    document.querySelector('#cases .section-title').textContent = 'Cases';
+    document.querySelector('#cases .cases-subtitle').textContent = 'Launching and scaling EdTech products';
+    const caseTitlesEn = [
+      'Course Line “Personal Finance”',
+      'Course “Crypto Investments”',
+      'Course Localization for Uzbekistan',
+      'Course “How to Sell on Uzum Market”'
+    ];
+    const caseMetaEn = [
+      'Product Owner · 2024-2025 · Traffic ~10,000/month',
+      'Product Owner · 2024-2025 · launch in 3 months',
+      'Product Manager · Market: Uzbekistan',
+      'Product Manager · 2023-2024'
+    ];
+    document.querySelectorAll('#cases .case-item > h3').forEach((el, i) => { if (caseTitlesEn[i]) el.textContent = caseTitlesEn[i]; });
+    document.querySelectorAll('#cases .case-item > .case-meta').forEach((el, i) => { if (caseMetaEn[i]) el.textContent = caseMetaEn[i]; });
+    const chipsEn = [
+      ['CR1 +5 p.p.', 'CR2 +4 p.p.', 'CSAT +15 p.p.', 'REVENUE +40%'],
+      ['0→1 launch', 'CR1 14%', 'CR2 11%', 'ROMI 160%', 'REVENUE X3'],
+      ['5 tracks', 'CPL 1000 -> 300 ₽', 'MVP test'],
+      ['0→1 launch', 'Local product', 'MVP launch', 'Go-to-market']
+    ];
+    document.querySelectorAll('#cases .case-item > .case-chips').forEach((el, i) => {
+      if (!chipsEn[i]) return;
+      el.innerHTML = chipsEn[i].map(v => `<span class="case-chip">${v}</span>`).join('');
+    });
+
+    const detailsEn = [
+      '<h4>Challenge</h4><p>The course line was operating but sales were declining: users submitted leads, yet the funnel and product path did not drive payment. Engagement and satisfaction also needed improvement.</p><h4>What I did</h4><ul><li>Ran audience and competitor research and identified key purchase barriers.</li><li>Decomposed CR1/CR2 funnel and identified bottlenecks in onboarding and conversion to payment.</li><li>Rebuilt CJM and decision scenarios with marketing and sales.</li><li>Fully redesigned landing pages based on research findings.</li><li>Launched growth experiments across onboarding and sales stages.</li></ul><h4>Result</h4><ul><li>CR1: 6% -> 11% (+5 p.p.)</li><li>CR2: 4% -> 8% (+4 p.p.)</li><li>CSAT: 78% -> 93% (+15 p.p.)</li><li>Revenue: +40% with unchanged traffic volume</li></ul>',
+      '<h4>Challenge</h4><p>User feedback from the Personal Finance line indicated a strong need for practical crypto knowledge. Market demand was high, but legal and communication risks were significant.</p><h4>What I did</h4><ul><li>Researched audience and competitors and clarified key user demand.</li><li>Designed an ethical product path: traditional assets first, crypto module second.</li><li>Aligned concept with legal team and safe communication boundaries.</li><li>Built unit economics and go-to-market plan with marketing and sales.</li><li>Launched MVP landing and validated demand.</li></ul><h4>Result</h4><ul><li>CR1: 14%</li><li>CR2: 11%</li><li>Revenue: x3 vs plan in first 3 months</li><li>ROMI: 160%</li><li>Time-to-market: 3 months</li></ul>',
+      '<h4>Challenge</h4><p>Lerna considered localizing courses for Uzbekistan, but before scaling investments we needed to validate real demand.</p><h4>What I did</h4><ul><li>Prioritized 5 directions for test campaigns.</li><li>Set tasks for MVP landing pages and local creatives.</li><li>Briefed local sales and marketing teams.</li><li>Defined KPI thresholds for leads, CPL, and sales.</li><li>Set ad budgets and analyzed sales feedback continuously.</li></ul><h4>Result</h4><ul><li>Lead targets were reached.</li><li>CPL improved from 1000 ₽ target to 300 ₽ actual.</li><li>Sales targets were not reached; localization hypothesis did not validate in current model.</li><li>Avoided major localization costs and saved team resources.</li></ul>',
+      '<h4>Context</h4><p>After localization tests, Lerna needed local Russian-language products that could drive revenue in Uzbekistan. Uzum Market created a timely market opportunity.</p><h4>What I did</h4><ul><li>Validated demand through market and audience research.</li><li>Co-designed program and produced content with partner expert.</li><li>Set tasks for landing pages and creatives.</li><li>Built unit economics and aligned model with sales/marketing.</li><li>Briefed local teams and monitored BI and feedback loops.</li></ul><h4>Result</h4><p>First module shipped in 1 month. Product reached market quickly; sales and revenue landed around target.</p><div class="case-next"><button type="button" class="case-growth-link" onclick="openGrowthPanel(event)">To product growth →</button></div>'
+    ];
+    document.querySelectorAll('#cases .case-item > .case-details').forEach((el, i) => { if (detailsEn[i]) el.innerHTML = detailsEn[i]; });
+
+    document.querySelector('#recommendations .section-title').textContent = 'Recommendations';
+    const recRolesEn = ['Business Development Director, Lerna', 'Program Director, Skillbox', 'Methodologist, Skillbox'];
+    document.querySelectorAll('#recommendations .recommendation-role').forEach((el, i) => { if (recRolesEn[i]) el.textContent = recRolesEn[i]; });
+    const recBodiesEn = [
+      '<p>Ilya worked with us at Lerna (Skillbox CIS) on the Uzbekistan direction, owning product growth and collaboration with HQ in Minsk.</p><p>Although he had no prior EdTech experience when joining, he adapted quickly and delivered visible results within the first months. He rapidly mastered key product and commercial metrics and started improving them through structured hypothesis work and data.</p><p>Working remotely, Ilya demonstrated strong ownership and accountability. He coordinated cross-functional teams effectively, kept focus on measurable outcomes, and aligned product, marketing, and sales. He also built productive communication with local partners and regularly proposed ideas that strengthened product positioning.</p><p>I consider Ilya a valuable product specialist with strong business thinking. He adapts quickly, can independently own a direction, and consistently influence key business metrics.</p>',
+      '<p>Ilya worked in my team on the Personal Finance product line and owned growth of product and commercial performance.</p><p>His key strength is deep product immersion and systematic hypothesis-driven work. He identified funnel bottlenecks, rebuilt positioning and offers, and ensured implementation across product, marketing, and sales teams.</p><p>As a result, conversion and revenue improved significantly, while user experience and product quality became stronger.</p><p>I would highlight his accountability, result focus, and reliability in remote collaboration.</p>',
+      '<p>I worked with Ilya on investment and trading courses and can say he is a product manager who genuinely cares about product quality.</p><p>He dives deep into details from program structure to user journey and funnel. In expert collaboration, he argues for user value while staying constructive and open to dialogue.</p><p>In teamwork, Ilya is result-focused, asks precise questions, and helps teams see the product more broadly. His decisions are based on data and audience understanding.</p><p>I recommend Ilya as a mature product professional who combines strategic thinking with attention to detail.</p>'
+    ];
+    document.querySelectorAll('#recommendations .recommendation-body').forEach((el, i) => { if (recBodiesEn[i]) el.innerHTML = recBodiesEn[i]; });
+
+    document.querySelector('#qa .section-title').textContent = 'Q&A';
+    const qaTitlesEn = [
+      'What am I looking for?',
+      'What work format fits me best?',
+      'What languages am I fluent in?',
+      'My hobbies?'
+    ];
+    const qaBodiesEn = [
+      '<p>I am looking for a Product Manager / Growth Product Manager role in EdTech or digital products with focus on metrics and revenue growth.</p><p>I value teams with strong cross-functional collaboration and space for experimentation.</p>',
+      '<p>Full-time, remote.</p><p>I am based in Italy and open to international teams and cross-time-zone collaboration.</p>',
+      '<p>Russian — native, English — Upper-Intermediate, Italian — beginner.</p>',
+      '<p>For the past 4 years, I have trained regularly in strength workouts, I play classical guitar, and recently I started learning Italian.</p>'
+    ];
+    document.querySelectorAll('#qa .qa-item h3').forEach((el, i) => { if (qaTitlesEn[i]) el.textContent = qaTitlesEn[i]; });
+    document.querySelectorAll('#qa .qa-content-inner').forEach((el, i) => { if (qaBodiesEn[i]) el.innerHTML = qaBodiesEn[i]; });
+
+    document.querySelector('#contacts .section-title').textContent = 'Contacts';
+    document.querySelector('#contacts .contacts-text').textContent = 'Open to Product Manager and Growth Product Manager opportunities. Happy to discuss your team and goals — reach out via Telegram, LinkedIn, or email.';
+
+    document.querySelector('#growthPanel .growth-title').innerHTML = 'How to Sell on Uzum Market<br>(Growth)';
+    document.querySelector('#growthPanel .growth-subtitle').textContent = 'Lerna · growth phase after launch';
+    const growthH4 = document.querySelectorAll('#growthPanel h4');
+    if (growthH4[0]) growthH4[0].textContent = 'Challenge';
+    if (growthH4[1]) growthH4[1].textContent = 'What I did';
+    if (growthH4[2]) growthH4[2].textContent = 'Result (6 months)';
+  }
+
+  function applyRu() {
+    const ru = i18nState.ru;
+    if (!ru.nav) return;
+    document.querySelectorAll('header nav a').forEach((el, i) => { if (ru.nav[i]) el.textContent = ru.nav[i]; });
+
+    document.querySelector('.hero h1').textContent = ru.hero.h1;
+    document.querySelector('.hero h2').textContent = ru.hero.h2;
+    document.querySelectorAll('.hero ul li').forEach((el, i) => { if (ru.hero.bullets[i]) el.textContent = ru.hero.bullets[i]; });
+    document.getElementById('cv-download-link').textContent = ru.hero.cvBtn;
+    document.querySelector('.btn-contact').textContent = ru.hero.contactBtn;
+    document.getElementById('brand-name').textContent = 'Илья Парфененок';
+    document.getElementById('cv-download-link').setAttribute('href', ruCvFile);
+
+    document.querySelector('#about .section-title').textContent = ru.about.title;
+    document.querySelector('#about .about-text p').textContent = ru.about.text;
+    document.querySelectorAll('.about-timeline-period').forEach((el, i) => { if (ru.about.periods[i]) el.textContent = ru.about.periods[i]; });
+    document.querySelectorAll('.about-timeline-role').forEach((el, i) => { if (ru.about.roles[i]) el.textContent = ru.about.roles[i]; });
+
+    document.querySelector('#services .section-title').textContent = ru.services.title;
+    document.querySelectorAll('#services .card h3').forEach((el, i) => { if (ru.services.cardTitles[i]) el.textContent = ru.services.cardTitles[i]; });
+    document.querySelectorAll('#services .card .card-content-inner').forEach((el, i) => { if (ru.services.cardBodies[i]) el.innerHTML = ru.services.cardBodies[i]; });
+
+    document.querySelector('#cases .section-title').textContent = ru.cases.title;
+    document.querySelector('#cases .cases-subtitle').textContent = ru.cases.subtitle;
+    document.querySelectorAll('#cases .case-item > h3').forEach((el, i) => { if (ru.cases.caseTitles[i]) el.textContent = ru.cases.caseTitles[i]; });
+    document.querySelectorAll('#cases .case-item > .case-meta').forEach((el, i) => { if (ru.cases.caseMeta[i]) el.textContent = ru.cases.caseMeta[i]; });
+    document.querySelectorAll('#cases .case-item > .case-chips').forEach((el, i) => { if (ru.cases.caseChips[i]) el.innerHTML = ru.cases.caseChips[i]; });
+    document.querySelectorAll('#cases .case-item > .case-details').forEach((el, i) => { if (ru.cases.caseDetails[i]) el.innerHTML = ru.cases.caseDetails[i]; });
+
+    document.querySelector('#recommendations .section-title').textContent = ru.recommendations.title;
+    document.querySelectorAll('#recommendations .recommendation-role').forEach((el, i) => { if (ru.recommendations.roles[i]) el.textContent = ru.recommendations.roles[i]; });
+    document.querySelectorAll('#recommendations .recommendation-body').forEach((el, i) => { if (ru.recommendations.bodies[i]) el.innerHTML = ru.recommendations.bodies[i]; });
+
+    document.querySelector('#qa .section-title').textContent = ru.qa.title;
+    document.querySelectorAll('#qa .qa-item h3').forEach((el, i) => { if (ru.qa.questions[i]) el.textContent = ru.qa.questions[i]; });
+    document.querySelectorAll('#qa .qa-content-inner').forEach((el, i) => { if (ru.qa.answers[i]) el.innerHTML = ru.qa.answers[i]; });
+
+    document.querySelector('#contacts .section-title').textContent = ru.contacts.title;
+    document.querySelector('#contacts .contacts-text').textContent = ru.contacts.text;
+
+    document.querySelector('#growthPanel .growth-title').innerHTML = ru.growth.title;
+    document.querySelector('#growthPanel .growth-subtitle').textContent = ru.growth.subtitle;
+  }
+
+  function setLanguage(lang) {
+    captureRuState();
+    if (lang === 'en') applyEn();
+    else applyRu();
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+    localStorage.setItem('landing-lang', lang);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    captureRuState();
+    const savedLang = localStorage.getItem('landing-lang') || 'ru';
+    setLanguage(savedLang);
+  });
+</script>
+
+</body>
+</html>

@@ -1271,12 +1271,23 @@
       section[id] { scroll-margin-top: 136px; }
       .hero {
         grid-template-columns: 1fr;
-        padding: 120px 16px 0;
-        gap: 22px;
+        padding: 120px 8px 0;
+        gap: 14px;
       }
       .hero-text {
         width: 100%;
         max-width: none;
+      }
+      .hero h1 {
+        font-size: 60px;
+        margin-bottom: 10px;
+      }
+      .hero h2 {
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+      .hero ul li {
+        font-size: 19px;
       }
       .hero h2,
       .hero ul,
@@ -1288,11 +1299,11 @@
         width: 100%;
         justify-content: center;
         justify-self: center;
-        margin: 6px 0 14px;
+        margin: 4px 0 10px;
       }
       .hero-image img {
-        width: min(100%, 320px);
-        max-width: 320px;
+        width: 100%;
+        max-width: none;
         transform: rotate(-0.6deg);
       }
       .about { padding: 0 32px 0; grid-template-columns: 1fr; }

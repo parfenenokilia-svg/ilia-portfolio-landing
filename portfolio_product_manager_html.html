@@ -1095,6 +1095,35 @@
       }
     }
 
+    /* Hard mobile lock for iOS/Telegram webviews */
+    @media (hover: none) and (pointer: coarse) {
+      .hero {
+        display: block !important;
+        grid-template-columns: 1fr !important;
+        padding: 120px 24px 0 !important;
+        gap: 14px !important;
+      }
+      .hero-text,
+      .hero h2,
+      .hero ul,
+      .hero-actions,
+      .hero-image {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .hero-image {
+        justify-content: flex-start !important;
+        margin: 4px 0 10px !important;
+      }
+      .hero-image img {
+        width: 100% !important;
+        max-width: none !important;
+        display: block !important;
+      }
+    }
+
     .semi-circles {
       position: absolute;
       inset: -60px;
@@ -1908,7 +1937,6 @@
     const hero = document.querySelector('.hero');
     const heroText = document.querySelector('.hero-text');
     const heroImage = document.querySelector('.hero-image');
-    const heroImg = heroImage ? heroImage.querySelector('img') : null;
     const heroSubtitle = heroText ? heroText.querySelector('h2') : null;
     if (!hero || !heroText || !heroImage || !heroSubtitle) return;
 
@@ -1923,47 +1951,11 @@
       deviceShortSide <= 600;
     if (isMobileLikeViewport) {
       hero.classList.add('hero-mobile-stack');
-      const effectiveWidth = Math.min(viewportWidth, visualViewportWidth);
-      const mobileContentWidth = Math.max(280, Math.floor(effectiveWidth - 48));
-      hero.style.setProperty('display', 'block', 'important');
-      hero.style.setProperty('grid-template-columns', '1fr', 'important');
-      hero.style.setProperty('padding-left', '24px', 'important');
-      hero.style.setProperty('padding-right', '24px', 'important');
-      hero.style.setProperty('column-gap', '14px', 'important');
-      heroText.style.width = mobileContentWidth + 'px';
-      heroText.style.maxWidth = mobileContentWidth + 'px';
-      heroText.style.margin = '0 auto';
-      heroImage.style.width = mobileContentWidth + 'px';
-      heroImage.style.maxWidth = mobileContentWidth + 'px';
-      heroImage.style.margin = '4px auto 10px';
-      heroImage.style.justifyContent = 'flex-start';
-      if (heroImg) {
-        heroImg.style.width = '100%';
-        heroImg.style.maxWidth = 'none';
-        heroImg.style.display = 'block';
-      }
       if (heroImage.parentElement !== heroText) {
         heroText.insertBefore(heroImage, heroSubtitle);
       }
     } else {
       hero.classList.remove('hero-mobile-stack');
-      hero.style.removeProperty('display');
-      hero.style.removeProperty('grid-template-columns');
-      hero.style.removeProperty('padding-left');
-      hero.style.removeProperty('padding-right');
-      hero.style.removeProperty('column-gap');
-      heroText.style.width = '';
-      heroText.style.maxWidth = '';
-      heroText.style.margin = '';
-      heroImage.style.width = '';
-      heroImage.style.maxWidth = '';
-      heroImage.style.margin = '';
-      heroImage.style.justifyContent = '';
-      if (heroImg) {
-        heroImg.style.width = '';
-        heroImg.style.maxWidth = '';
-        heroImg.style.display = '';
-      }
       if (heroImage.parentElement !== hero) hero.appendChild(heroImage);
     }
   }

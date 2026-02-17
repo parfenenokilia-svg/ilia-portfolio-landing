@@ -1124,6 +1124,35 @@
       }
     }
 
+    /* Ultimate fallback: portrait webviews that spoof desktop width */
+    @media (orientation: portrait) and (max-width: 1600px) {
+      .hero {
+        display: block !important;
+        grid-template-columns: 1fr !important;
+        padding: 120px 24px 0 !important;
+        gap: 14px !important;
+      }
+      .hero-text,
+      .hero h2,
+      .hero ul,
+      .hero-actions,
+      .hero-image {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .hero-image {
+        justify-content: flex-start !important;
+        margin: 4px 0 10px !important;
+      }
+      .hero-image img {
+        width: 100% !important;
+        max-width: none !important;
+        display: block !important;
+      }
+    }
+
     .semi-circles {
       position: absolute;
       inset: -60px;
@@ -1948,7 +1977,8 @@
       isCoarsePointer ||
       viewportWidth <= 1200 ||
       visualViewportWidth <= 600 ||
-      deviceShortSide <= 600;
+      deviceShortSide <= 600 ||
+      (window.matchMedia('(orientation: portrait)').matches && viewportWidth <= 1600);
     if (isMobileLikeViewport) {
       hero.classList.add('hero-mobile-stack');
       if (heroImage.parentElement !== heroText) {

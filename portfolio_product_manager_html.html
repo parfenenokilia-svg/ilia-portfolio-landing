@@ -1522,6 +1522,13 @@
       .card h3.card-title-long { font-size: 20px; line-height: 1.1; }
       .cards-wrap { min-height: 6px; }
       .cards-wrap.cards-open { min-height: 440px; }
+      .card.active .card-content,
+      .case-item.active .case-details,
+      .recommendation-accordion.active .recommendation-body,
+      .qa-item.active .qa-content {
+        max-height: none !important;
+        overflow: visible !important;
+      }
       .services-core-metrics { display: none; }
       .section-metrics { display: none; }
       .cards-bg { display: none; }

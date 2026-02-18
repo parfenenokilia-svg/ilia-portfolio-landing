@@ -96,6 +96,35 @@
       max-width: none !important;
       display: block !important;
     }
+    html.force-phone,
+    html.force-phone body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+    body.force-phone section,
+    body.force-phone .divider {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    body.force-phone .about,
+    body.force-phone .services,
+    body.force-phone .cases,
+    body.force-phone .recommendations,
+    body.force-phone .qa,
+    body.force-phone .contacts {
+      padding-left: 24px !important;
+      padding-right: 24px !important;
+    }
+    body.force-phone .cases-grid {
+      grid-template-columns: 1fr !important;
+    }
+    body.force-phone .cards-row {
+      overflow-x: auto !important;
+      padding-bottom: 4px !important;
+    }
 
     header {
       position: fixed;
@@ -1850,7 +1879,7 @@
       <div>
         <h3 class="recommendation-name">Эдита Анциферова</h3>
         <div class="recommendation-role-row">
-          <p class="recommendation-role">Business Development Director, Lerna</p>
+          <p class="recommendation-role">Директор по развитию бизнеса, Lerna</p>
           <a class="recommendation-telegram" href="https://t.me/editaanciferova" target="_blank" rel="noopener noreferrer" aria-label="Telegram Эдиты Анциферовой">
             <img src="icons8-телеграм-50.png" alt="Telegram">
           </a>
@@ -1870,7 +1899,7 @@
       <div>
         <h3 class="recommendation-name">Николай Смирнов</h3>
         <div class="recommendation-role-row">
-          <p class="recommendation-role">Program Director, Skillbox</p>
+          <p class="recommendation-role">Программный директор, Skillbox</p>
           <a class="recommendation-telegram" href="https://t.me/smirnov606" target="_blank" rel="noopener noreferrer" aria-label="Telegram Николая Смирнова">
             <img src="icons8-телеграм-50.png" alt="Telegram">
           </a>
@@ -2006,8 +2035,13 @@
   function applyForcePhoneClass() {
     const ua = navigator.userAgent || '';
     const isIPhone = /iPhone|iPod/i.test(ua);
+    const isIPadDesktopUA = /Macintosh/i.test(ua) && navigator.maxTouchPoints > 1;
     const isAndroidPhone = /Android/i.test(ua) && /Mobile/i.test(ua);
-    document.body.classList.toggle('force-phone', isIPhone || isAndroidPhone);
+    const shortSide = Math.min(window.screen.width || 0, window.screen.height || 0);
+    const isPhonePhysicalSize = shortSide > 0 && shortSide <= 900;
+    const forcePhone = (isIPhone || isIPadDesktopUA || isAndroidPhone) && isPhonePhysicalSize;
+    document.body.classList.toggle('force-phone', forcePhone);
+    document.documentElement.classList.toggle('force-phone', forcePhone);
   }
 
   function toggleCard(card) {

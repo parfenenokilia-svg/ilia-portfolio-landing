@@ -45,11 +45,10 @@
     body.force-phone header nav {
       order: 3 !important;
       width: 100% !important;
-      gap: 16px !important;
-      flex-wrap: nowrap !important;
-      overflow-x: auto !important;
-      white-space: nowrap !important;
-      -webkit-overflow-scrolling: touch !important;
+      gap: 10px 16px !important;
+      flex-wrap: wrap !important;
+      overflow: visible !important;
+      white-space: normal !important;
       padding-bottom: 2px !important;
     }
     body.force-phone header nav a {
@@ -555,7 +554,7 @@
     }
 
     .recommendation-accordion.active .recommendation-body {
-      max-height: 1200px;
+      max-height: 5000px;
       opacity: 1;
     }
 
@@ -677,7 +676,7 @@
     }
 
     .qa-item.active .qa-content {
-      max-height: 360px;
+      max-height: 5000px;
     }
 
     .contacts-card {
@@ -857,7 +856,7 @@
     }
 
     .case-item.active .case-details {
-      max-height: 1400px;
+      max-height: 5000px;
       opacity: 1;
     }
 
@@ -1396,7 +1395,7 @@
     }
 
     .card.active .card-content {
-      max-height: 1200px;
+      max-height: 5000px;
       opacity: 1;
     }
 
@@ -1436,14 +1435,12 @@
       header nav {
         order: 3;
         width: 100%;
-        gap: 16px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
+        gap: 10px 16px;
+        flex-wrap: wrap;
+        overflow: visible;
+        white-space: normal;
         padding-bottom: 2px;
       }
-      header nav::-webkit-scrollbar { display: none; }
       header nav a {
         margin-left: 0;
         flex: 0 0 auto;
@@ -2055,8 +2052,16 @@
 
   function toggleCard(card) {
     const isActive = card.classList.contains('active');
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-    if (!isActive) card.classList.add('active');
+    document.querySelectorAll('.card').forEach(c => {
+      c.classList.remove('active');
+      const content = c.querySelector('.card-content');
+      if (content) content.style.maxHeight = '0px';
+    });
+    if (!isActive) {
+      card.classList.add('active');
+      const content = card.querySelector('.card-content');
+      if (content) content.style.maxHeight = (content.scrollHeight + 24) + 'px';
+    }
     const wrap = document.querySelector('.cards-wrap');
     if (!wrap) return;
     const hasActive = !!document.querySelector('.card.active');
@@ -2065,14 +2070,34 @@
 
   function toggleCase(item) {
     const isActive = item.classList.contains('active');
-    document.querySelectorAll('.case-item').forEach(c => c.classList.remove('active'));
-    if (!isActive) item.classList.add('active');
+    document.querySelectorAll('.case-item').forEach(c => {
+      c.classList.remove('active');
+      const details = c.querySelector('.case-details');
+      if (details) details.style.maxHeight = '0px';
+    });
+    if (!isActive) {
+      item.classList.add('active');
+      const details = item.querySelector('.case-details');
+      if (details) details.style.maxHeight = (details.scrollHeight + 32) + 'px';
+    }
+  }
+
+  function syncActiveCaseHeight() {
+    syncActiveAccordionHeights();
   }
 
   function toggleRecommendation(item) {
     const isActive = item.classList.contains('active');
-    document.querySelectorAll('.recommendation-accordion').forEach(c => c.classList.remove('active'));
-    if (!isActive) item.classList.add('active');
+    document.querySelectorAll('.recommendation-accordion').forEach(c => {
+      c.classList.remove('active');
+      const body = c.querySelector('.recommendation-body');
+      if (body) body.style.maxHeight = '0px';
+    });
+    if (!isActive) {
+      item.classList.add('active');
+      const body = item.querySelector('.recommendation-body');
+      if (body) body.style.maxHeight = (body.scrollHeight + 24) + 'px';
+    }
   }
 
   function syncHeroImagePosition() {
@@ -2151,8 +2176,30 @@
 
   function toggleQa(item) {
     const isActive = item.classList.contains('active');
-    document.querySelectorAll('.qa-item').forEach(c => c.classList.remove('active'));
-    if (!isActive) item.classList.add('active');
+    document.querySelectorAll('.qa-item').forEach(c => {
+      c.classList.remove('active');
+      const body = c.querySelector('.qa-content');
+      if (body) body.style.maxHeight = '0px';
+    });
+    if (!isActive) {
+      item.classList.add('active');
+      const body = item.querySelector('.qa-content');
+      if (body) body.style.maxHeight = (body.scrollHeight + 24) + 'px';
+    }
+  }
+
+  function syncActiveAccordionHeights() {
+    const activeCard = document.querySelector('.card.active .card-content');
+    if (activeCard) activeCard.style.maxHeight = (activeCard.scrollHeight + 24) + 'px';
+
+    const activeCase = document.querySelector('.case-item.active .case-details');
+    if (activeCase) activeCase.style.maxHeight = (activeCase.scrollHeight + 32) + 'px';
+
+    const activeRecommendation = document.querySelector('.recommendation-accordion.active .recommendation-body');
+    if (activeRecommendation) activeRecommendation.style.maxHeight = (activeRecommendation.scrollHeight + 24) + 'px';
+
+    const activeQa = document.querySelector('.qa-item.active .qa-content');
+    if (activeQa) activeQa.style.maxHeight = (activeQa.scrollHeight + 24) + 'px';
   }
 
   function openGrowthPanel(event) {
@@ -2325,7 +2372,7 @@
     const qaTitlesEn = [
       'What am I looking for?',
       'What work format fits me best?',
-      'What languages am I fluent in?',
+      'Which languages do I speak?',
       'My hobbies?'
     ];
     const qaBodiesEn = [
@@ -2399,6 +2446,7 @@
     captureRuState();
     if (lang === 'en') applyEn();
     else applyRu();
+    syncActiveCaseHeight();
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
     localStorage.setItem('landing-lang', lang);
   }
@@ -2409,6 +2457,7 @@
     window.addEventListener('resize', function () {
       applyForcePhoneClass();
       syncHeroImagePosition();
+      syncActiveCaseHeight();
     });
     captureRuState();
     const savedLang = localStorage.getItem('landing-lang') || 'ru';

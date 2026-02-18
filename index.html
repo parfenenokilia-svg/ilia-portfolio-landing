@@ -513,6 +513,7 @@
     .recommendation-telegram {
       width: 22px;
       height: 22px;
+      flex: 0 0 22px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1355,8 +1356,14 @@
     .card h3 {
       font-family: "Noteworthy", "Kalam", cursive;
       font-size: 24px;
+      line-height: 1.15;
       color: var(--green);
       font-weight: 700;
+    }
+
+    .card h3.card-title-long {
+      font-size: 22px;
+      line-height: 1.12;
     }
 
     .card-content {
@@ -1514,6 +1521,8 @@
         white-space: normal;
       }
       .card { min-width: 300px; max-width: 340px; height: 100px; padding: 16px 20px; }
+      .card h3 { font-size: 22px; line-height: 1.12; }
+      .card h3.card-title-long { font-size: 20px; line-height: 1.1; }
       .cards-wrap { min-height: 6px; }
       .cards-wrap.cards-open { min-height: 440px; }
       .services-core-metrics { display: none; }
@@ -1701,7 +1710,7 @@
     </div>
 
     <div class="card" onclick="toggleCard(this)">
-      <h3>Управление кросс‑функциональными командами</h3>
+      <h3 class="card-title-long">Управление кросс‑функциональными командами</h3>
       <div class="card-content">
         <div class="card-content-inner">
         <p>Беру на себя ownership продукта и довожу задачи до результата.</p>

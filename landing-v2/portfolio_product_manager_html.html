@@ -566,7 +566,8 @@
       font-size: 88px;
       font-weight: 700;
       line-height: 0.86;
-      color: rgba(23, 23, 23, 0.08);
+      color: rgba(23, 23, 23, 0.08) !important;
+      -webkit-text-fill-color: rgba(23, 23, 23, 0.08);
       letter-spacing: -0.03em;
       pointer-events: none;
       user-select: none;
@@ -622,14 +623,11 @@
       font-size: 34px;
       line-height: 0.95;
       margin-bottom: 0;
+      padding-right: 94px;
       color: #171717 !important;
       -webkit-text-fill-color: #171717;
       text-decoration: none;
-    }
-
-    .case-tile * {
-      color: inherit;
-      -webkit-text-fill-color: inherit;
+      overflow-wrap: anywhere;
     }
 
     .case-spotlight {
@@ -664,10 +662,15 @@
       display: flex;
       align-items: flex-start;
       gap: 14px;
-      padding: 24px 18px 14px;
+      padding: 24px 58px 14px 18px;
       border-bottom: 1px solid rgba(24, 31, 44, 0.2);
       background: #ececea;
       position: relative;
+    }
+
+    .case-spotlight-head > div {
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
     .case-spotlight-head::before {
@@ -703,6 +706,8 @@
       font-size: 38px;
       line-height: 0.98;
       margin-bottom: 8px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .case-spotlight-meta {
@@ -1137,10 +1142,6 @@
       transform: rotate(0.8deg);
     }
 
-    .recommend-grid-wrap {
-      position: relative;
-    }
-
     .recommend-grid {
       display: flex;
       gap: 20px;
@@ -1245,22 +1246,14 @@
     }
 
     .recommend-scroll-hint {
-      position: absolute;
-      right: 6px;
-      top: 12px;
-      z-index: 2;
-      width: 36px;
-      height: 36px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       font-family: "Space Grotesk", sans-serif;
-      font-size: 24px;
+      font-size: clamp(36px, 6vw, 54px);
       font-weight: 700;
-      color: #171717;
-      background: var(--accent);
-      border: 2px solid #171717;
+      line-height: 0.9;
+      color: var(--accent);
       pointer-events: none;
+      user-select: none;
     }
 
     .recommend-drawer-text p {
@@ -1435,8 +1428,8 @@
       html, body { overflow-x: hidden; }
       .wrap {
         max-width: 100%;
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 22px;
+        padding-right: 22px;
       }
       .nav-row {
         height: auto;
@@ -1459,6 +1452,7 @@
         grid-area: lang;
         margin-left: 0;
         justify-self: end;
+        margin-right: 6px;
       }
       nav {
         grid-area: nav;
@@ -1483,6 +1477,7 @@
         gap: 18px;
         min-width: 0;
       }
+      .hero::after { display: none; }
       h1 {
         font-size: clamp(56px, 16vw, 72px);
         line-height: 0.92;
@@ -1536,10 +1531,22 @@
       .card-title { font-size: 34px; }
       .cases-grid { grid-template-columns: 1fr; gap: 12px; }
       .case-tile { min-height: 0; padding: 16px; }
-      .case-tile-title { font-size: 28px; }
+      .case-tile-title {
+        font-size: 28px;
+        padding-right: 80px;
+      }
       .case-tile:nth-child(odd),
       .case-tile:nth-child(even) { transform: none; }
-      .case-no-bg { font-size: 72px; right: 10px; bottom: 8px; }
+      .case-no-bg {
+        font-size: 66px;
+        right: 8px;
+        bottom: 8px;
+      }
+      .case-spotlight-head {
+        gap: 10px;
+        padding: 22px 52px 12px 14px;
+      }
+      .case-spotlight-title { font-size: 26px; }
       .service-title { font-size: 34px; }
       .service-body { font-size: 18px; }
       .service-list { font-size: 19px; }
@@ -1556,6 +1563,38 @@
       }
       .section-sub { font-size: 18px; }
       .lang { margin-left: auto; }
+      .timeline {
+        margin-top: 14px;
+        padding-top: 0;
+      }
+      .timeline-items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        overflow: visible;
+        padding-top: 0;
+      }
+      .timeline-items::before { display: none; }
+      .tl-item {
+        min-width: 0;
+        min-height: 0;
+        display: grid;
+        gap: 4px;
+      }
+      .tl-role {
+        position: static;
+        transform: none !important;
+        min-width: 0;
+        width: fit-content;
+        max-width: 100%;
+        font-size: 20px;
+        padding: 10px 12px;
+      }
+      .tl-year {
+        margin-top: 0;
+        font-size: 30px;
+        line-height: 0.95;
+      }
       .recommend-grid { gap: 14px; }
       .avatar-lg { width: 156px; height: 156px; }
       .recommend-name { font-size: 32px; }
@@ -1703,11 +1742,9 @@
     <section id="recommendations">
       <div class="section-head">
         <h2 id="recommendationsTitle">Рекомендации</h2>
-      </div>
-      <div class="recommend-grid-wrap">
-        <div class="recommend-grid" id="recommendGrid"></div>
         <span class="recommend-scroll-hint" aria-hidden="true">→</span>
       </div>
+      <div class="recommend-grid" id="recommendGrid"></div>
       <article class="recommend-drawer" id="recommendDrawer">
         <div class="recommend-drawer-side" id="recommendDrawerSide"></div>
         <div class="recommend-drawer-text" id="recommendDrawerText"></div>

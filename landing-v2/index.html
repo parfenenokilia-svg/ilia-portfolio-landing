@@ -1142,6 +1142,10 @@
       transform: rotate(0.8deg);
     }
 
+    .recommend-grid-wrap {
+      position: relative;
+    }
+
     .recommend-grid {
       display: flex;
       gap: 20px;
@@ -1154,8 +1158,7 @@
     .recommend-grid::-webkit-scrollbar { display: none; }
 
     .recommend-tile {
-      flex: 0 0 100%;
-      max-width: 100%;
+      flex: 0 0 clamp(260px, 30vw, 340px);
       border: 2px solid transparent;
       background: transparent;
       padding: 0;
@@ -1255,6 +1258,8 @@
       pointer-events: none;
       user-select: none;
     }
+
+    .recommend-scroll-hint-head { display: none; }
 
     .recommend-drawer-text p {
       margin: 0 0 8px;
@@ -1596,6 +1601,11 @@
         line-height: 0.95;
       }
       .recommend-grid { gap: 14px; }
+      .recommend-tile {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .recommend-scroll-hint-head { display: inline-block; }
       .avatar-lg { width: 156px; height: 156px; }
       .recommend-name { font-size: 32px; }
       .recommend-role { font-size: 16px; }
@@ -1742,9 +1752,11 @@
     <section id="recommendations">
       <div class="section-head">
         <h2 id="recommendationsTitle">Рекомендации</h2>
-        <span class="recommend-scroll-hint" aria-hidden="true">→</span>
+        <span class="recommend-scroll-hint recommend-scroll-hint-head" aria-hidden="true">→</span>
       </div>
-      <div class="recommend-grid" id="recommendGrid"></div>
+      <div class="recommend-grid-wrap">
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </div>
       <article class="recommend-drawer" id="recommendDrawer">
         <div class="recommend-drawer-side" id="recommendDrawerSide"></div>
         <div class="recommend-drawer-text" id="recommendDrawerText"></div>
@@ -2054,7 +2066,7 @@
 
     let activeCaseIndex = null;
     let flatCases = [];
-    let activeRecommendationIndex = 0;
+    let activeRecommendationIndex = null;
     const companyAccent = {
       Lerna: "#171717",
       Skillbox: "#171717"
@@ -2186,7 +2198,7 @@
     function renderRecommendations(lang) {
       const root = document.getElementById('recommendGrid');
       const list = data[lang].recommendations;
-      if (activeRecommendationIndex > list.length - 1) activeRecommendationIndex = 0;
+      if (activeRecommendationIndex !== null && activeRecommendationIndex > list.length - 1) activeRecommendationIndex = null;
       root.innerHTML = list.map((r, idx) => `
         <article class="recommend-tile ${idx === activeRecommendationIndex ? 'active' : ''}" data-idx="${idx}">
           <div class="recommend-tile-head">

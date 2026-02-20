@@ -1514,12 +1514,13 @@
         grid-area: brand;
         font-size: 22px;
         line-height: 1;
+        padding-left: 4px;
       }
       .lang {
         grid-area: lang;
         margin-left: 0;
         justify-self: end;
-        margin-right: 6px;
+        margin-right: 10px;
       }
       nav {
         grid-area: nav;
@@ -1532,6 +1533,7 @@
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 4px;
+        padding-left: 4px;
       }
       nav::-webkit-scrollbar { display: none; }
       nav a {
@@ -1641,14 +1643,36 @@
         grid-template-columns: 1fr;
         gap: 12px;
         overflow: visible;
-        padding-top: 0;
+        padding: 4px 0 4px 28px;
+        width: max-content;
+        margin: 0 auto;
+        position: relative;
       }
-      .timeline-items::before { display: none; }
+      .timeline-items::before {
+        display: block;
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 6px;
+        bottom: 6px;
+        width: 4px;
+        background: #171717;
+      }
       .tl-item {
         min-width: 0;
         min-height: 0;
         display: grid;
         gap: 4px;
+        position: relative;
+      }
+      .tl-item::before {
+        content: "";
+        position: absolute;
+        left: -21px;
+        top: 14px;
+        width: 10px;
+        height: 10px;
+        background: #171717;
       }
       .tl-role {
         position: static;
@@ -1671,7 +1695,14 @@
       }
       .recommend-scroll-hint-head { display: inline-block; }
       .avatar-lg { width: 156px; height: 156px; }
-      .recommend-name { font-size: 32px; }
+      .recommend-tile-head {
+        justify-items: center;
+        text-align: center;
+      }
+      .recommend-name {
+        font-size: 30px;
+        white-space: nowrap;
+      }
       .recommend-role { font-size: 16px; }
       .recommend-drawer {
         grid-template-columns: 1fr;

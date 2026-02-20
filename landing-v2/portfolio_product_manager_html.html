@@ -923,6 +923,68 @@
       background: var(--accent);
     }
 
+    .case-mobile {
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-mobile summary {
+      padding: 16px 18px 16px;
+      position: relative;
+    }
+
+    .case-mobile-logo {
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .case-mobile-logo img {
+      max-height: 34px;
+      width: auto;
+      max-width: 180px;
+      display: block;
+    }
+
+    .case-mobile-title {
+      margin: 0 0 8px;
+      padding-right: 86px;
+      font-size: 26px;
+      line-height: 0.98;
+      color: #171717 !important;
+      -webkit-text-fill-color: #171717;
+      position: relative;
+      z-index: 1;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .case-mobile-meta {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .case-mobile .card-chips {
+      position: relative;
+      z-index: 1;
+      padding-right: 74px;
+    }
+
+    .case-mobile .case-no-bg {
+      font-size: 64px;
+      right: 10px;
+      top: 12px;
+      bottom: auto;
+      z-index: 0;
+    }
+
     .services-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1535,6 +1597,7 @@
       section { padding: 64px 0; }
       .card-title { font-size: 34px; }
       .cases-grid { grid-template-columns: 1fr; gap: 12px; }
+      .case-mobile { display: block; }
       .case-tile { min-height: 0; padding: 16px; }
       .case-tile-title {
         font-size: 28px;
@@ -1552,6 +1615,7 @@
         padding: 22px 52px 12px 14px;
       }
       .case-spotlight-title { font-size: 26px; }
+      .case-spotlight { display: none !important; }
       .service-title { font-size: 34px; }
       .service-body { font-size: 18px; }
       .service-list { font-size: 19px; }
@@ -2130,6 +2194,7 @@
 
     function renderCases(lang) {
       const root = document.getElementById('casesGrid');
+      const spotlight = document.getElementById('caseSpotlight');
       root.innerHTML = '';
       flatCases = [];
 
@@ -2138,6 +2203,64 @@
           flatCases.push({ ...card, companyLogo: group.companyLogo, company: group.company });
         });
       });
+
+      const isMobileCases = window.matchMedia('(max-width: 760px)').matches;
+      if (isMobileCases) {
+        if (activeCaseIndex !== null && activeCaseIndex > flatCases.length - 1) activeCaseIndex = null;
+        spotlight.classList.remove('open');
+        spotlight.style.display = 'none';
+
+        root.innerHTML = flatCases.map((item, idx) => {
+          let bodyHtml = item.body;
+          if (item.growth) {
+            bodyHtml += `
+              <details class="case-growth">
+                <summary>${item.growth.cta}</summary>
+                <div class="case-growth-content">
+                  <h4 class="case-growth-title">${item.growth.title}</h4>
+                  <p class="case-growth-sub">${item.growth.subtitle}</p>
+                  ${item.growth.body}
+                </div>
+              </details>
+            `;
+          }
+          return `
+            <details class="card case-mobile ${idx === activeCaseIndex ? 'open' : ''}" ${idx === activeCaseIndex ? 'open' : ''} data-idx="${idx}">
+              <summary>
+                <span class="case-no-bg">${String(idx + 1).padStart(2, "0")}</span>
+                <div class="case-mobile-logo"><img src="${item.companyLogo}" alt="Company logo"></div>
+                <h3 class="case-mobile-title">${item.title}</h3>
+                <p class="case-mobile-meta">${item.meta}</p>
+                <div class="card-chips">${item.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div>
+              </summary>
+              <div class="card-body">${bodyHtml}</div>
+            </details>
+          `;
+        }).join('');
+
+        root.querySelectorAll('.case-mobile').forEach((el) => {
+          const idx = Number(el.dataset.idx);
+          if (idx === activeCaseIndex) el.classList.add('open');
+          el.addEventListener('toggle', () => {
+            if (el.open) {
+              activeCaseIndex = idx;
+              root.querySelectorAll('.case-mobile').forEach((other, i) => {
+                if (other !== el) {
+                  other.open = false;
+                  other.classList.remove('open');
+                }
+                if (i === idx) other.classList.add('open');
+              });
+            } else if (activeCaseIndex === idx) {
+              activeCaseIndex = null;
+              el.classList.remove('open');
+            }
+          });
+        });
+        return;
+      }
+
+      spotlight.style.display = '';
 
       flatCases.forEach((item, idx) => {
         const tile = document.createElement('button');

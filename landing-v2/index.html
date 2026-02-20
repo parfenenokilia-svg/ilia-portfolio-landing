@@ -292,6 +292,7 @@
       justify-content: center;
       transition: background-color 0.2s ease, transform 0.2s ease;
       will-change: transform;
+      position: relative;
     }
     .bubble:last-child { border-right: 0; }
     .bubble:nth-child(2) { background: #f6f6f4; }
@@ -327,6 +328,35 @@
     .bubble-v.multiline {
       font-size: clamp(26px, 2.4vw, 36px);
       line-height: 1;
+    }
+
+    .bubble.is-revenue::after {
+      content: "✶";
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      font-size: 15px;
+      line-height: 1;
+      color: #171717;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-metrics-note {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 1.2;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(23, 23, 23, 0.62);
+      margin: 8px 14px 2px;
+      cursor: pointer;
+      display: inline-block;
+      pointer-events: auto;
+    }
+
+    .hero-metrics-note:hover {
+      color: rgba(23, 23, 23, 0.82);
     }
 
     .btn {
@@ -546,6 +576,21 @@
       opacity: 1;
     }
 
+    .case-tile::before {
+      content: "↗";
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(23, 23, 23, 0.62);
+      transition: transform 0.2s ease, color 0.2s ease;
+      z-index: 2;
+      pointer-events: none;
+    }
+
     .case-tile[data-company="Lerna"] { --tile-accent: #171717; }
     .case-tile[data-company="Skillbox"] { --tile-accent: #171717; }
 
@@ -578,6 +623,12 @@
       transform: translateY(-2px);
       border-color: #171717;
       box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.12), 14px 14px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .case-tile:hover::before,
+    .case-tile.active::before {
+      transform: translate(2px, -2px);
+      color: #171717;
     }
 
     .case-tile:hover .case-tile-title { color: #171717; }
@@ -934,6 +985,26 @@
       position: relative;
     }
 
+    .case-mobile summary::before {
+      content: "↗";
+      position: absolute;
+      right: 18px;
+      top: 16px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(23, 23, 23, 0.6);
+      transition: transform 0.2s ease, color 0.2s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .case-mobile.open summary::before {
+      transform: translate(2px, -2px);
+      color: #171717;
+    }
+
     .case-mobile-logo {
       min-height: 32px;
       display: flex;
@@ -1228,9 +1299,29 @@
       cursor: pointer;
       scroll-snap-align: start;
       transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .recommend-tile::after {
+      content: "↗";
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(23, 23, 23, 0.55);
+      transition: transform 0.2s ease, color 0.2s ease;
+      pointer-events: none;
     }
 
     .recommend-tile:hover { transform: translateY(-2px); }
+
+    .recommend-tile:hover::after,
+    .recommend-tile.active::after {
+      transform: translate(2px, -2px);
+      color: #171717;
+    }
 
     .recommend-tile.active {
       border-color: #171717;
@@ -1805,6 +1896,7 @@
 
     <section class="hero-metrics" id="heroMetrics">
       <div class="bubble-grid" id="heroBubbles"></div>
+      <p class="hero-metrics-note" id="heroMetricsNote"></p>
     </section>
 
     <section id="cases">
@@ -1908,6 +2000,7 @@
             "Кросс-функциональное управление: маркетинг, продажи, дизайн"
           ],
           bubbles: ["CR1: 4% → 11%", "CR2: 6% → 12%", "Трафик: 1700 → 4100", "Выручка: x5"],
+          metricsNote: "Метрики из кейса Uzum Market.",
           cv: "Скачать CV",
           contact: "Написать мне",
           cvFile: "Илья Парфененок_резюме.pdf"
@@ -2044,6 +2137,7 @@
             "Cross-functional leadership: product, marketing, sales"
           ],
           bubbles: ["CR1: 4% → 11%", "CR2: 6% → 12%", "Traffic: 1700 → 4100", "Revenue: x5"],
+          metricsNote: "Metrics from the Uzum Market case.",
           cv: "Download CV",
           contact: "Contact me",
           cvFile: "Ilia Parfenenok_CV.pdf"
@@ -2162,6 +2256,7 @@
     let activeCaseIndex = null;
     let flatCases = [];
     let activeRecommendationIndex = null;
+    let currentLang = 'ru';
     const companyAccent = {
       Lerna: "#171717",
       Skillbox: "#171717"
@@ -2461,13 +2556,52 @@
       document.getElementById('contactBtn').textContent = d.contact;
       document.getElementById('heroBubbles').innerHTML = d.bubbles.map(m => {
         const [left, right] = m.split(':').map(s => s.trim());
+        const isRevenue = left && /выручка|revenue/i.test(left);
         if (right) {
           const isLongValue = right.length > 11;
           const rightHtml = isLongValue ? right.replace("→", "→<br>") : right;
-          return `<div class="bubble"><span class="bubble-k">${left}</span><span class="bubble-v${isLongValue ? ' multiline' : ''}">${rightHtml}</span></div>`;
+          return `<div class="bubble${isRevenue ? ' is-revenue' : ''}"><span class="bubble-k">${left}</span><span class="bubble-v${isLongValue ? ' multiline' : ''}">${rightHtml}</span></div>`;
         }
         return `<div class="bubble"><span class="bubble-v">${m}</span></div>`;
       }).join('');
+      const note = document.getElementById('heroMetricsNote');
+      if (note) note.textContent = d.metricsNote || '';
+    }
+
+    function openUzumGrowthCase() {
+      const casesSection = document.getElementById('cases');
+      if (!casesSection) return;
+
+      let targetIdx = -1;
+      for (let i = 0; i < flatCases.length; i++) {
+        const c = flatCases[i];
+        if (c && c.growth && /uzum/i.test(c.title || "")) {
+          targetIdx = i;
+          break;
+        }
+      }
+      if (targetIdx === -1) return;
+
+      activeCaseIndex = targetIdx;
+      renderCases(currentLang);
+
+      casesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      window.setTimeout(() => {
+        const isMobileCases = window.matchMedia('(max-width: 760px)').matches;
+        if (isMobileCases) {
+          const mobileCard = document.querySelector(`.case-mobile[data-idx="${targetIdx}"]`);
+          if (!mobileCard) return;
+          mobileCard.open = true;
+          mobileCard.classList.add('open');
+          const growth = mobileCard.querySelector('.case-growth');
+          if (growth) growth.open = true;
+          mobileCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        const growth = document.querySelector('#spotlightBody .case-growth');
+        if (growth) growth.open = true;
+      }, 260);
     }
 
     function renderStatic(lang) {
@@ -2488,6 +2622,7 @@
     }
 
     function setLang(lang) {
+      currentLang = lang;
       renderStatic(lang);
       renderHero(lang);
       renderCases(lang);
@@ -2502,6 +2637,19 @@
     document.querySelectorAll('.lang button').forEach(btn => {
       btn.addEventListener('click', () => setLang(btn.dataset.lang));
     });
+
+    const heroMetricsNote = document.getElementById('heroMetricsNote');
+    if (heroMetricsNote) {
+      heroMetricsNote.setAttribute('tabindex', '0');
+      heroMetricsNote.setAttribute('role', 'button');
+      heroMetricsNote.addEventListener('click', openUzumGrowthCase);
+      heroMetricsNote.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openUzumGrowthCase();
+        }
+      });
+    }
 
     setLang(localStorage.getItem('landing-lang') || 'ru');
   </script>
